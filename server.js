@@ -1,5 +1,5 @@
 // import http from "http";
-import app from "./src/app.js";
+import app from "./app.js";
 const PORT = 3000;
 
 app.listen(PORT, () => {

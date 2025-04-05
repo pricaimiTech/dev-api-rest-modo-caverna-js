@@ -4,7 +4,12 @@
         "title": "flexivel",
         "descrição": "",
         "icone": "",
-        "categoria": []
+        "categoria": [],
+        "objetivo":{
+            "id": 1,
+            "title": "objetivo",
+            "descricao": "string"
+        }
     },
     {
         "id": 2,
@@ -30,6 +35,11 @@
                 "pilar": "obrigatório",
                 "atividade": []
             }
-        ]
+        ],
+        "objetivo":{
+            "id": 1,
+            "title": "objetivo",
+            "descricao": "string"
+        }
     }
 ]
