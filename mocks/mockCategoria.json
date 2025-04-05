@@ -4,14 +4,12 @@
         "title": "exercicio",
         "descrição": "string",
         "icone": "",
-        "pilar": [
-            {
-                "id": 2,
-                "title": "obrigatório",
-                "descrição": "string",
-                "icone": "string"
-            }
-        ],
+        "pilar": {
+            "id": 2,
+            "title": "obrigatório",
+            "descrição": "string",
+            "icone": "string"
+        },
         "isConclued": "se todas tarefas forem finalizadas a categoria se finaliza",
         "atividade": []
     },
@@ -20,14 +18,14 @@
         "title": "mente",
         "descrição": "string",
         "icone": "string",
-        "pilar": [
+        "pilar":
             {
                 "id": 2,
                 "title": "obrigatório",
                 "descrição": "string",
                 "icone": "string"
             }
-        ],
+        ,
         "isConclued": "se todas tarefas forem finalizadas a categoria se finaliza",
         "atividade": []
     },
@@ -36,14 +34,14 @@
         "title": "intelecto",
         "descrição": "string",
         "icone": "string",
-        "pilar": [
+        "pilar":
             {
                 "id": 2,
                 "title": "obrigatório",
                 "descrição": "string",
                 "icone": "string"
             }
-        ],
+        ,
         "isConclued": "se todas tarefas forem finalizadas a categoria se finaliza",
         "atividade": []
     },
@@ -52,14 +50,14 @@
         "title": "flexivel",
         "descrição": "string",
         "icone": "string",
-        "pilar": [
+        "pilar": 
             {
                 "id": 1,
                 "title": "flexivel",
                 "descrição": "string",
                 "icone": "string"
             }
-        ],
+        ,
         "isConclued": "se todas tarefas forem finalizadas a categoria se finaliza",
         "atividade": []
     },
@@ -68,14 +66,14 @@
         "title": "flexivel",
         "descrição": "string",
         "icone": "string",
-        "pilar": [
+        "pilar": 
             {
                 "id": 1,
                 "title": "flexivel",
                 "descrição": "string",
                 "icone": "string"
             }
-        ],
+        ,
         "isConclued": "se todas tarefas forem finalizadas a categoria se finaliza",
         "atividade": []
     },
@@ -84,14 +82,14 @@
         "title": "flexivel",
         "descrição": "string",
         "icone": "string",
-        "pilar": [
+        "pilar":
             {
                 "id": 1,
                 "title": "flexivel",
                 "descrição": "string",
                 "icone": "string"
             }
-        ],
+        ,
         "isConclued": "se todas tarefas forem finalizadas a categoria se finaliza",
         "atividade": []
     }

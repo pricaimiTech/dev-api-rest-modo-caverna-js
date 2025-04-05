@@ -1,0 +1,94 @@
+[
+    {
+        "id": 1,
+        "title": "Objetivo SMART",
+        "descrição": "",
+        "icone": "",
+        "andamento": "calculo com base atividades flexível em cima do prazo",
+        "prazo": {
+            "id": 1,
+            "descricao": "30 dias",
+            "prazo": 30
+        },
+        "data_inicio": "2025-04-01",
+        "data_fim": "2025-05-01",
+        "status": "EM_ANDAMENTO",
+        "pilares": [
+            {
+                "id": 1,
+                "title": "flexivel",
+                "categoria": []
+            },
+            {
+                "id": 2,
+                "title": "obrigatório",
+                "categoria": [
+                    {
+                        "id": 1,
+                        "title": "exercicio",
+                        "pilar": "obrigatório",
+                        "atividade": []
+                    },
+                    {
+                        "id": 2,
+                        "title": "mente",
+                        "pilar": "obrigatório",
+                        "atividade": []
+                    },
+                    {
+                        "id": 3,
+                        "title": "intelecto",
+                        "pilar": "obrigatório",
+                        "atividade": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "title": "Objetivo",
+        "descrição": "",
+        "icone": "",
+        "andamento": "calculo com base atividades flexível em cima do prazo",
+        "prazo": {
+            "id": 1,
+            "descricao": "30 dias",
+            "prazo": 30
+        },
+        "data_inicio": "2025-04-01",
+        "data_fim": "2025-05-01",
+        "status": "FINALIZADO",
+        "pilares": [
+            {
+                "id": 1,
+                "title": "flexivel",
+                "categoria": []
+            },
+            {
+                "id": 2,
+                "title": "obrigatório",
+                "categoria": [
+                    {
+                        "id": 1,
+                        "title": "exercicio",
+                        "pilar": "obrigatório",
+                        "atividade": []
+                    },
+                    {
+                        "id": 2,
+                        "title": "mente",
+                        "pilar": "obrigatório",
+                        "atividade": []
+                    },
+                    {
+                        "id": 3,
+                        "title": "intelecto",
+                        "pilar": "obrigatório",
+                        "atividade": []
+                    }
+                ]
+            }
+        ]
+    }
+]

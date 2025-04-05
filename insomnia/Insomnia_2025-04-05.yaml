@@ -5,6 +5,334 @@ meta:
   created: 1743881595518
   modified: 1743881595518
 collection:
+  - name: atividades
+    meta:
+      id: fld_42878e3dddee4c7cae31cbe346618237
+      created: 1743884143622
+      modified: 1743884143622
+      sortKey: -1743884143622
+    children:
+      - url: "{{ _.baseURL }}/atividade"
+        name: atividade
+        meta:
+          id: req_375a972498e74b259422d6f49b6c5598
+          created: 1743881687280
+          modified: 1743884151293
+          isPrivate: false
+          sortKey: -1743884151252
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.baseURL }}/atividade/diarias"
+        name: atividade/diaria
+        meta:
+          id: req_7ffb422488e74204879ae0c3e75bd3ed
+          created: 1743884158117
+          modified: 1743884172451
+          isPrivate: false
+          sortKey: -1743882879650
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.baseURL }}/atividade/diarias?concluidas=true"
+        name: atividade/diaria?isConcluida
+        meta:
+          id: req_510135aa368d4132ae07095b2eb89330
+          created: 1743884333142
+          modified: 1743884410301
+          isPrivate: false
+          sortKey: -1743882243849
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.baseURL }}/atividade/1"
+        name: atividade/id
+        meta:
+          id: req_74d7bc640f66474db4b54a04f4534f5c
+          created: 1743884667569
+          modified: 1743884956717
+          isPrivate: false
+          sortKey: -1743883515451
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.baseURL }}/atividade/categoria/exercicio"
+        name: atividade/categoria/:nome
+        meta:
+          id: req_e53400b59da741e2ab4fb725ed1c32d2
+          created: 1743885407043
+          modified: 1743885470851
+          isPrivate: false
+          sortKey: -1743883197550.5
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.baseURL }}/atividade/categoria/id/1"
+        name: atividade/categoria/:id
+        meta:
+          id: req_566784db89c14fd398f3e6227b0260cb
+          created: 1743885477355
+          modified: 1743885532070
+          isPrivate: false
+          sortKey: -1743883038600.25
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: categoria
+    meta:
+      id: fld_fc5ea2c27e3c432d90303db193da641f
+      created: 1743884787578
+      modified: 1743884787578
+      sortKey: -1743884787578
+    children:
+      - url: "{{ _.baseURL }}/categorias"
+        name: categoria
+        meta:
+          id: req_f3e47f0c43c64e5382af743eca7f9945
+          created: 1743881663341
+          modified: 1743885946973
+          isPrivate: false
+          sortKey: -1743884793766
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.baseURL }}/categorias/1"
+        name: categoria/id
+        meta:
+          id: req_1f323a554b5740ffa5025ade00897e63
+          created: 1743884803319
+          modified: 1743885958474
+          isPrivate: false
+          sortKey: -1743884472509
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.baseURL }}/categorias/pilar/id/2"
+        name: categoria/pilar/id
+        meta:
+          id: req_71ec575f18c740f4a2016850a97a822d
+          created: 1743885748108
+          modified: 1743885918677
+          isPrivate: false
+          sortKey: -1743884311880.5
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: objetivo
+    meta:
+      id: fld_ea070a28b3824829ab703653add72bc8
+      created: 1743887019689
+      modified: 1743887019689
+      sortKey: -1743887019689
+    children:
+      - url: "{{ _.baseURL }}/objetivos"
+        name: objetivo
+        meta:
+          id: req_b77d1306cd4a47fbb3576b8cdb6d349f
+          created: 1743881628968
+          modified: 1743888049766
+          isPrivate: false
+          sortKey: -1743887023802
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.baseURL }}/objetivos/1"
+        name: objetivo/id
+        meta:
+          id: req_7e8efc4721684e9c8da9f5fcd1b29ec9
+          created: 1743888059525
+          modified: 1743888062884
+          isPrivate: false
+          sortKey: -1743885908784
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.baseURL }}/objetivos/status/EM_ANDAMENTO"
+        name: objetivo?status
+        meta:
+          id: req_9373e7b8442648d8b507abaead984b3f
+          created: 1743888083924
+          modified: 1743888574627
+          isPrivate: false
+          sortKey: -1743885351275
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Pilar
+    meta:
+      id: fld_3a7fe4a778fe4051ba43ec667434920c
+      created: 1743887039910
+      modified: 1743887039910
+      sortKey: -1743887039910
+    children:
+      - url: "{{ _.baseURL }}/pilares"
+        name: pilar
+        meta:
+          id: req_5caba83361954324bae6451b1c87944d
+          created: 1743881640340
+          modified: 1743887145663
+          isPrivate: false
+          sortKey: -1743887110322
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.baseURL }}/pilares/2"
+        name: pilar/id
+        meta:
+          id: req_ab2c90694fa5476ab6b39a4d9fe34b30
+          created: 1743887118501
+          modified: 1743887153849
+          isPrivate: false
+          sortKey: -1743887067062
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.baseURL }}/pilares/objetivo/id/1"
+        name: pilar/objetivo/id
+        meta:
+          id: req_da1e1bf03f1c4d3aa0b8930434c421ef
+          created: 1743887180517
+          modified: 1743887185265
+          isPrivate: false
+          sortKey: -1743887045432
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
   - url: "{{ _.baseURL }}/"
     name: Home
     meta:
@@ -13,86 +341,6 @@ collection:
       modified: 1743881849087
       isPrivate: false
       sortKey: -1743881608048
-    method: GET
-    headers:
-      - name: User-Agent
-        value: insomnia/11.0.2
-    settings:
-      renderRequestBody: true
-      encodeUrl: true
-      followRedirects: global
-      cookies:
-        send: true
-        store: true
-      rebuildPath: true
-  - url: "{{ _.baseURL }}/objetivo"
-    name: objetivo
-    meta:
-      id: req_b77d1306cd4a47fbb3576b8cdb6d349f
-      created: 1743881628968
-      modified: 1743881844632
-      isPrivate: false
-      sortKey: -1743759305078
-    method: GET
-    headers:
-      - name: User-Agent
-        value: insomnia/11.0.2
-    settings:
-      renderRequestBody: true
-      encodeUrl: true
-      followRedirects: global
-      cookies:
-        send: true
-        store: true
-      rebuildPath: true
-  - url: "{{ _.baseURL }}/pilar"
-    name: pilar
-    meta:
-      id: req_5caba83361954324bae6451b1c87944d
-      created: 1743881640340
-      modified: 1743881839805
-      isPrivate: false
-      sortKey: -1743698153593
-    method: GET
-    headers:
-      - name: User-Agent
-        value: insomnia/11.0.2
-    settings:
-      renderRequestBody: true
-      encodeUrl: true
-      followRedirects: global
-      cookies:
-        send: true
-        store: true
-      rebuildPath: true
-  - url: "{{ _.baseURL }}/categoria"
-    name: categoria
-    meta:
-      id: req_f3e47f0c43c64e5382af743eca7f9945
-      created: 1743881663341
-      modified: 1743881825940
-      isPrivate: false
-      sortKey: -1743667577850.5
-    method: GET
-    headers:
-      - name: User-Agent
-        value: insomnia/11.0.2
-    settings:
-      renderRequestBody: true
-      encodeUrl: true
-      followRedirects: global
-      cookies:
-        send: true
-        store: true
-      rebuildPath: true
-  - url: "{{ _.baseURL }}/atividade"
-    name: atividade
-    meta:
-      id: req_375a972498e74b259422d6f49b6c5598
-      created: 1743881687280
-      modified: 1743881782267
-      isPrivate: false
-      sortKey: -1743652289979.25
     method: GET
     headers:
       - name: User-Agent
