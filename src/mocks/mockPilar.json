@@ -1,0 +1,35 @@
+[
+    {
+        "id": 1,
+        "title": "flexivel",
+        "descrição": "",
+        "icone": "",
+        "categoria": []
+    },
+    {
+        "id": 2,
+        "title": "obrigatorio",
+        "descrição": "",
+        "icone": "",
+        "categoria": [
+            {
+                "id": 1,
+                "title": "exercicio",
+                "pilar": "obrigatório",
+                "atividade": []
+            },
+            {
+                "id": 2,
+                "title": "mente",
+                "pilar": "obrigatório",
+                "atividade": []
+            },
+            {
+                "id": 3,
+                "title": "intelecto",
+                "pilar": "obrigatório",
+                "atividade": []
+            }
+        ]
+    }
+]

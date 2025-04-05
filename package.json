@@ -1,0 +1,17 @@
+{
+  "name": "dev-api-rest-modo-caverna",
+  "version": "1.0.0",
+  "description": "Aplicativo destinado a construir uma API Rest para um aplicativo de modo caverna da Ana Jords.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "nodemon": "^3.1.9"
+  }
+}

@@ -1,0 +1,98 @@
+[
+    {
+        "id": 1,
+        "title": "exercicio",
+        "descrição": "string",
+        "icone": "",
+        "pilar": [
+            {
+                "id": 2,
+                "title": "obrigatório",
+                "descrição": "string",
+                "icone": "string"
+            }
+        ],
+        "isConclued": "se todas tarefas forem finalizadas a categoria se finaliza",
+        "atividade": []
+    },
+    {
+        "id": 2,
+        "title": "mente",
+        "descrição": "string",
+        "icone": "string",
+        "pilar": [
+            {
+                "id": 2,
+                "title": "obrigatório",
+                "descrição": "string",
+                "icone": "string"
+            }
+        ],
+        "isConclued": "se todas tarefas forem finalizadas a categoria se finaliza",
+        "atividade": []
+    },
+    {
+        "id": 3,
+        "title": "intelecto",
+        "descrição": "string",
+        "icone": "string",
+        "pilar": [
+            {
+                "id": 2,
+                "title": "obrigatório",
+                "descrição": "string",
+                "icone": "string"
+            }
+        ],
+        "isConclued": "se todas tarefas forem finalizadas a categoria se finaliza",
+        "atividade": []
+    },
+    {
+        "id": 4,
+        "title": "flexivel",
+        "descrição": "string",
+        "icone": "string",
+        "pilar": [
+            {
+                "id": 1,
+                "title": "flexivel",
+                "descrição": "string",
+                "icone": "string"
+            }
+        ],
+        "isConclued": "se todas tarefas forem finalizadas a categoria se finaliza",
+        "atividade": []
+    },
+    {
+        "id": 5,
+        "title": "flexivel",
+        "descrição": "string",
+        "icone": "string",
+        "pilar": [
+            {
+                "id": 1,
+                "title": "flexivel",
+                "descrição": "string",
+                "icone": "string"
+            }
+        ],
+        "isConclued": "se todas tarefas forem finalizadas a categoria se finaliza",
+        "atividade": []
+    },
+    {
+        "id": 6,
+        "title": "flexivel",
+        "descrição": "string",
+        "icone": "string",
+        "pilar": [
+            {
+                "id": 1,
+                "title": "flexivel",
+                "descrição": "string",
+                "icone": "string"
+            }
+        ],
+        "isConclued": "se todas tarefas forem finalizadas a categoria se finaliza",
+        "atividade": []
+    }
+]

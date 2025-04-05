@@ -1,0 +1,18 @@
+{
+    "id": 1,
+    "title": "atividade",
+    "descrição": "string",
+    "icone": "string",
+    "isConclued": "boolean",
+    "isDiaria": "boolean (se obrigatorio, vir como true)",
+    "categoria": {
+        "id": 1,
+        "nome_categoria": "exercicio",
+        "descricao_categoria": "string",
+        "pilar": {
+            "id": 2,
+            "title": "obrigatorio",
+            "descricao_pilar": "string"
+        }
+    }
+}
