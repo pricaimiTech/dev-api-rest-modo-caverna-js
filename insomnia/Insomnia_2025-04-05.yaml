@@ -1,0 +1,122 @@
+type: collection.insomnia.rest/5.0
+name: modo-caverna
+meta:
+  id: wrk_2def7ab451a1426da075287907e51b5e
+  created: 1743881595518
+  modified: 1743881595518
+collection:
+  - url: "{{ _.baseURL }}/"
+    name: Home
+    meta:
+      id: req_8c3d96c86d0848f2af50d1a27290a0b8
+      created: 1743881608048
+      modified: 1743881849087
+      isPrivate: false
+      sortKey: -1743881608048
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.0.2
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.baseURL }}/objetivo"
+    name: objetivo
+    meta:
+      id: req_b77d1306cd4a47fbb3576b8cdb6d349f
+      created: 1743881628968
+      modified: 1743881844632
+      isPrivate: false
+      sortKey: -1743759305078
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.0.2
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.baseURL }}/pilar"
+    name: pilar
+    meta:
+      id: req_5caba83361954324bae6451b1c87944d
+      created: 1743881640340
+      modified: 1743881839805
+      isPrivate: false
+      sortKey: -1743698153593
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.0.2
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.baseURL }}/categoria"
+    name: categoria
+    meta:
+      id: req_f3e47f0c43c64e5382af743eca7f9945
+      created: 1743881663341
+      modified: 1743881825940
+      isPrivate: false
+      sortKey: -1743667577850.5
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.0.2
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.baseURL }}/atividade"
+    name: atividade
+    meta:
+      id: req_375a972498e74b259422d6f49b6c5598
+      created: 1743881687280
+      modified: 1743881782267
+      isPrivate: false
+      sortKey: -1743652289979.25
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.0.2
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_e352746ac316752041da67a5b50f2b2bed40d414
+    created: 1743881595521
+    modified: 1743881595521
+environments:
+  name: Base Environment
+  meta:
+    id: env_e352746ac316752041da67a5b50f2b2bed40d414
+    created: 1743881595520
+    modified: 1743881815903
+    isPrivate: false
+  data:
+    baseURL: http://localhost:3000
