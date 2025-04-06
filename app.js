@@ -11,6 +11,7 @@ const atividades = JSON.parse(fs.readFileSync("./mocks/mockAtividade.json", "utf
 const app = express();
 app.use(express.json());
 
+
 /**
  * @swagger
  * /:
@@ -23,6 +24,20 @@ app.use(express.json());
 app.get("/", (req, res) => {
     res.status(200).send("Hello World Modo Caverna!");
   });
+
+/**
+ * @swagger
+ * /objetivos:
+ *   get:
+ *     summary: Retorna todos os objetivos criados
+ *     tags: [Objetivos]
+ *     responses:
+ *       200:
+ *         description: Exibe uma lista de objetivos já cadastrados na base
+ */
+app.get("/objetivos", (req, res) => {
+    res.status(200).json(objetivos);
+});
   
 /**
  * @swagger
@@ -85,6 +100,21 @@ app.get("/objetivos/:id", (req, res) => {
     }
     res.status(200).json(objetivo);
 });
+
+/**
+ * @swagger
+ * /objetivo:
+ *   post:
+ *     summary: Cria um novo objetivo
+ *     tags: [Objetivos]
+ *     responses:
+ *       201:
+ *         description: Criou um novo objetivo
+ */
+app.post("/objetivo", (req, res)=>{
+    objetivos.push(req.body);
+    res.status(201).json(req.body);
+})
 
 /**
  * @swagger
@@ -211,6 +241,21 @@ app.get("/categorias", (req, res) => {
 
 /**
  * @swagger
+ * /categoria:
+ *   post:
+ *     summary: Cria uma nova categoria
+ *     tags: [Categorias]
+ *     responses:
+ *       201:
+ *         description: Criou uma nova categoria
+ */
+app.post("/categoria", (req, res)=>{
+    categorias.push(req.body);
+    res.status(201).json(req.body);
+})
+
+/**
+ * @swagger
  * /categorias/{id}:
  *   get:
  *     summary: Retorna uma categoria específica
@@ -316,6 +361,21 @@ app.get("/categorias/pilar/id/:id", (req, res) => {
 app.get("/atividade", (req, res) => {
     res.status(200).json(atividades);
 });
+
+/**
+ * @swagger
+ * /atividade:
+ *   post:
+ *     summary: Cria uma nova atividade
+ *     tags: [Atividades]
+ *     responses:
+ *       201:
+ *         description: Criou uma nova atividade
+ */
+app.post("/atividade", (req, res)=>{
+    atividades.push(req.body);
+    res.status(201).json(req.body);
+})
 
 /**
  * @swagger
