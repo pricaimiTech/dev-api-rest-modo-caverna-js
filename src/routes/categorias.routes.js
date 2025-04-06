@@ -1,5 +1,6 @@
 import express from "express";
 import fs from "fs";
+import getIndex from "../utils/getItem.js";
 
 const router = express.Router();
 const categorias = JSON.parse(fs.readFileSync("./mocks/mockCategoria.json", "utf8"));
@@ -126,5 +127,45 @@ router.get("/pilar/id/:id", (req, res) => {
 
     res.status(200).json(categoriaPorPilar);
 });
+
+
+/**
+ * @swagger
+ * /categorias/{id}:
+ *   put:
+ *     summary: Atualiza o titulo de uma categoria
+ *     tags: [Categorias]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID do objetivo
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 example: Aprender Node.js
+ *     responses:
+ *       200:
+ *         description: Objetivo encontrado
+ *       404:
+ *         description: Objetivo não encontrado
+ */
+router.put("/:id", (req, res) => {
+    const index = getIndex(categorias, req.params.id);
+    if (!categorias[index]) {
+        return res.status(404).json({ message: "Categoria não encontrado" });
+    }
+    categorias[index].title = req.body.title;
+    res.status(200).json(categorias[index]);
+});
+
 
 export default router;

@@ -1,5 +1,6 @@
 import express from "express";
 import fs from "fs";
+import getIndex from "../utils/getItem.js";
 
 const router = express.Router();
 const atividades = JSON.parse(fs.readFileSync("./mocks/mockAtividade.json", "utf8"));
@@ -160,6 +161,42 @@ router.get("/categoria/id/:id", (req, res) => {
     res.status(200).json(atividadesPorCategoria);
 });
 
-
+/**
+ * @swagger
+ * /atividades/{id}:
+ *   put:
+ *     summary: Atualiza o titulo de uma atividade
+ *     tags: [Atividades]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID do objetivo
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 example: Aprender Node.js
+ *     responses:
+ *       200:
+ *         description: Atividade encontrado
+ *       404:
+ *         description: Atividade não encontrado
+ */
+router.put("/:id", (req, res) => {
+    const index = getIndex(atividades, req.params.id);
+    if (!atividades[index]) {
+        return res.status(404).json({ message: "Atividade não encontrado" });
+    }
+    atividades[index].title = req.body.title;
+    res.status(200).json(atividades[index]);
+});
 
 export default router;

@@ -1,5 +1,6 @@
 import express from "express";
 import fs from "fs";
+import getIndex from "../utils/getItem.js";
 
 const router = express.Router();
 
@@ -72,11 +73,11 @@ router.get("/status/:status", (req, res) => {
  *         description: Objetivo não encontrado
  */
 router.get("/:id", (req, res) => {
-    let objetivo = objetivos.find(objetivo => objetivo.id === parseInt(req.params.id));
-    if (!objetivo) {
+    const index = getIndex(objetivos, req.params.id);
+    if (!objetivos[index]) {
         return res.status(404).json({ message: "Objetivo não encontrado" });
     }
-    res.status(200).json(objetivo);
+    res.status(200).json(objetivos[index]);
 });
 
 /**
@@ -92,6 +93,44 @@ router.get("/:id", (req, res) => {
 router.post("/", (req, res) => {
     objetivos.push(req.body);
     res.status(201).json(req.body);
+});
+
+/**
+ * @swagger
+ * /objetivos:
+ *   put:
+ *     summary: Atualiza o titulo do objetivo
+ *     tags: [Objetivos]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID do objetivo
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 example: Aprender Node.js
+ *     responses:
+ *       200:
+ *         description: Objetivo encontrado
+ *       404:
+ *         description: Objetivo não encontrado
+ */
+router.put("/:id", (req, res) => {
+    const index = getIndex(objetivos, req.params.id);
+    if (!objetivos[index]) {
+        return res.status(404).json({ message: "Objetivo não encontrado" });
+    }
+    objetivos[index].title = req.body.title;
+    res.status(200).json(objetivos[index]);
 });
 
 export default router;
