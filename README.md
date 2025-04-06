@@ -20,6 +20,7 @@ Aplicativo destinado a construir uma API Rest para um aplicativo de modo caverna
 
 - Node.js
 - Figma
+- Swagger
 
 --- 
 ## Projeto 
@@ -30,4 +31,4 @@ Aplicativo destinado a construir uma API Rest para um aplicativo de modo caverna
 
 ### Análise 
 
-Em breve ...
+Consulte o nosso Swagger [link](http://localhost:3000/api-docs/#/)
