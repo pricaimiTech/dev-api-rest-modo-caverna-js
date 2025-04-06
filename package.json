@@ -1,6 +1,7 @@
 {
   "name": "dev-api-rest-modo-caverna",
   "version": "1.0.0",
+  "type": "module",
   "description": "Aplicativo destinado a construir uma API Rest para um aplicativo de modo caverna da Ana Jords.",
   "main": "index.js",
   "scripts": {

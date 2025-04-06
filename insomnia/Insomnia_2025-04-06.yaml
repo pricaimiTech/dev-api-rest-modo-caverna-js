@@ -9,15 +9,15 @@ collection:
     meta:
       id: fld_42878e3dddee4c7cae31cbe346618237
       created: 1743884143622
-      modified: 1743884143622
+      modified: 1743943449915
       sortKey: -1743884143622
     children:
-      - url: "{{ _.baseURL }}/atividade"
+      - url: "{{ _.baseURL }}/atividades"
         name: atividade
         meta:
           id: req_375a972498e74b259422d6f49b6c5598
           created: 1743881687280
-          modified: 1743884151293
+          modified: 1743946550790
           isPrivate: false
           sortKey: -1743884151252
         method: GET
@@ -32,12 +32,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.baseURL }}/atividade/diarias"
+      - url: "{{ _.baseURL }}/atividades/diarias"
         name: atividade/diaria
         meta:
           id: req_7ffb422488e74204879ae0c3e75bd3ed
           created: 1743884158117
-          modified: 1743884172451
+          modified: 1743946585498
           isPrivate: false
           sortKey: -1743882879650
         method: GET
@@ -52,12 +52,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.baseURL }}/atividade/diarias?concluidas=true"
+      - url: "{{ _.baseURL }}/atividades/diarias?concluidas=true"
         name: atividade/diaria?isConcluida
         meta:
           id: req_510135aa368d4132ae07095b2eb89330
           created: 1743884333142
-          modified: 1743884410301
+          modified: 1743946591837
           isPrivate: false
           sortKey: -1743882243849
         method: GET
@@ -72,12 +72,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.baseURL }}/atividade/1"
+      - url: "{{ _.baseURL }}/atividades/1"
         name: atividade/id
         meta:
           id: req_74d7bc640f66474db4b54a04f4534f5c
           created: 1743884667569
-          modified: 1743884956717
+          modified: 1743946563828
           isPrivate: false
           sortKey: -1743883515451
         method: GET
@@ -92,12 +92,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.baseURL }}/atividade/categoria/exercicio"
+      - url: "{{ _.baseURL }}/atividades/categoria/exercicio"
         name: atividade/categoria/:nome
         meta:
           id: req_e53400b59da741e2ab4fb725ed1c32d2
           created: 1743885407043
-          modified: 1743885470851
+          modified: 1743946569829
           isPrivate: false
           sortKey: -1743883197550.5
         method: GET
@@ -112,16 +112,59 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.baseURL }}/atividade/categoria/id/1"
+      - url: "{{ _.baseURL }}/atividades/categoria/id/1"
         name: atividade/categoria/:id
         meta:
           id: req_566784db89c14fd398f3e6227b0260cb
           created: 1743885477355
-          modified: 1743885532070
+          modified: 1743946578281
           isPrivate: false
           sortKey: -1743883038600.25
         method: GET
         headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.baseURL }}/atividades"
+        name: atividade
+        meta:
+          id: req_dc0975ec3de946af9b230db548dbf484
+          created: 1743943454326
+          modified: 1743946557348
+          isPrivate: false
+          sortKey: -1743883833351.5
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"id": 4,
+            	"title": "atividade nova criada",
+            	"descrição": "string",
+            	"icone": "string",
+            	"isConclued": false,
+            	"isDiaria": true,
+            	"categoria": {
+            		"id": 1,
+            		"nome_categoria": "exercicio",
+            		"descricao_categoria": "string",
+            		"pilar": {
+            			"id": 2,
+            			"title": "obrigatorio",
+            			"descricao_pilar": "string"
+            		}
+            	}
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
           - name: User-Agent
             value: insomnia/11.0.2
         settings:
@@ -140,11 +183,11 @@ collection:
       sortKey: -1743884787578
     children:
       - url: "{{ _.baseURL }}/categorias"
-        name: categoria
+        name: categorias
         meta:
           id: req_f3e47f0c43c64e5382af743eca7f9945
           created: 1743881663341
-          modified: 1743885946973
+          modified: 1743943295412
           isPrivate: false
           sortKey: -1743884793766
         method: GET
@@ -199,6 +242,45 @@ collection:
             send: true
             store: true
           rebuildPath: true
+      - url: "{{ _.baseURL }}/categorias"
+        name: categoria
+        meta:
+          id: req_8ba4e0c9b9674fd097e57650f8b89e61
+          created: 1743943236723
+          modified: 1743946507292
+          isPrivate: false
+          sortKey: -1743884633137.5
+        method: POST
+        body:
+          mimeType: application/json
+          text: >-
+            {
+            	"id": 7,
+            	"title": "criando uma nova categoria",
+            	"descrição": "string",
+            	"icone": "",
+            	"pilar": {
+            		"id": 1,
+            		"title": "flexível",
+            		"descrição": "string",
+            		"icone": "string"
+            	},
+            	"isConclued": "se todas tarefas forem finalizadas a categoria se finaliza",
+            	"atividade": []
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
   - name: objetivo
     meta:
       id: fld_ea070a28b3824829ab703653add72bc8
@@ -211,7 +293,7 @@ collection:
         meta:
           id: req_b77d1306cd4a47fbb3576b8cdb6d349f
           created: 1743881628968
-          modified: 1743888049766
+          modified: 1743946348444
           isPrivate: false
           sortKey: -1743887023802
         method: GET
@@ -226,12 +308,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.baseURL }}/objetivos/1"
+      - url: "{{ _.baseURL }}/objetivos/5"
         name: objetivo/id
         meta:
           id: req_7e8efc4721684e9c8da9f5fcd1b29ec9
           created: 1743888059525
-          modified: 1743888062884
+          modified: 1743946404039
           isPrivate: false
           sortKey: -1743885908784
         method: GET
@@ -256,6 +338,77 @@ collection:
           sortKey: -1743885351275
         method: GET
         headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.baseURL }}/objetivos/"
+        name: objetivo
+        meta:
+          id: req_90d0dfce6c5347e5a7f578b093cd5926
+          created: 1743942758658
+          modified: 1743946379512
+          isPrivate: false
+          sortKey: -1743886466293
+        method: POST
+        body:
+          mimeType: application/json
+          text: >-
+            {
+            	"id": 5,
+            	"title": "Criando um segundo novo objetivo",
+            	"descrição": "",
+            	"icone": "",
+            	"andamento": "calculo com base atividades flexível em cima do prazo",
+            	"prazo": {
+            		"id": 2,
+            		"descricao": "60 dias",
+            		"prazo": 60
+            	},
+            	"data_inicio": "2025-04-01",
+            	"data_fim": "2025-05-01",
+            	"status": "INICIAR",
+            	"pilares": [
+            		{
+            			"id": 1,
+            			"title": "flexivel",
+            			"categoria": []
+            		},
+            		{
+            			"id": 2,
+            			"title": "obrigatório",
+            			"categoria": [
+            				{
+            					"id": 1,
+            					"title": "exercicio",
+            					"pilar": "obrigatório",
+            					"atividade": []
+            				},
+            				{
+            					"id": 2,
+            					"title": "mente",
+            					"pilar": "obrigatório",
+            					"atividade": []
+            				},
+            				{
+            					"id": 3,
+            					"title": "intelecto",
+            					"pilar": "obrigatório",
+            					"atividade": []
+            				}
+            			]
+            		}
+            	]
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
           - name: User-Agent
             value: insomnia/11.0.2
         settings:
@@ -333,26 +486,6 @@ collection:
             send: true
             store: true
           rebuildPath: true
-  - url: "{{ _.baseURL }}/"
-    name: Home
-    meta:
-      id: req_8c3d96c86d0848f2af50d1a27290a0b8
-      created: 1743881608048
-      modified: 1743881849087
-      isPrivate: false
-      sortKey: -1743881608048
-    method: GET
-    headers:
-      - name: User-Agent
-        value: insomnia/11.0.2
-    settings:
-      renderRequestBody: true
-      encodeUrl: true
-      followRedirects: global
-      cookies:
-        send: true
-        store: true
-      rebuildPath: true
 cookieJar:
   name: Default Jar
   meta:
