@@ -133,4 +133,34 @@ router.put("/:id", (req, res) => {
     res.status(200).json(objetivos[index]);
 });
 
+
+/**
+ * @swagger
+ * /objetivos/{id}:
+ *   delete:
+ *     summary: Deleta um objetivo
+ *     tags: [Objetivos]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID do objetivo
+ *     responses:
+ *       200:
+ *         description: Objetivo deletado com sucesso
+ *       404:
+ *         description: Objetivo não encontrado
+ */
+router.delete("/:id", (req, res) => {
+    const index = getIndex(objetivos, req.params.id);
+    if (!objetivos[index]) {
+        return res.status(404).json({ message: "Objetivo não encontrado" });
+    }
+    objetivos.splice(index, 1);
+    res.status(200).json({message : "Objetivo deletado com sucesso"});
+});
+
+
 export default router;
