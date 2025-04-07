@@ -72,12 +72,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.baseURL }}/atividades/1"
+      - url: "{{ _.baseURL }}/atividades/2"
         name: atividade/id
         meta:
           id: req_74d7bc640f66474db4b54a04f4534f5c
           created: 1743884667569
-          modified: 1743946563828
+          modified: 1744067917473
           isPrivate: false
           sortKey: -1743883515451
         method: GET
@@ -175,12 +175,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.baseURL }}/atividades/1"
+      - url: "{{ _.baseURL }}/atividades/2"
         name: atividade
         meta:
           id: req_a70c83bf13be4ef38c44860bebbfeb4d
           created: 1743948693850
-          modified: 1743948723379
+          modified: 1744067835279
           isPrivate: false
           sortKey: -1743883674401.25
         method: PUT
@@ -205,6 +205,30 @@ collection:
             		}
             	}
             }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.baseURL }}/atividades/3"
+        name: atividade
+        meta:
+          id: req_d5ef9bd659544f8081ee85d8d2fd005c
+          created: 1744067690722
+          modified: 1744068272058
+          isPrivate: false
+          sortKey: -1743883594926.125
+        method: DELETE
+        body:
+          mimeType: application/json
         headers:
           - name: Content-Type
             value: application/json
@@ -350,6 +374,30 @@ collection:
             		"isConclued": "se todas tarefas forem finalizadas a categoria se finaliza",
             		"atividade": []
             	}
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.baseURL }}/categorias/4"
+        name: categoria
+        meta:
+          id: req_16df1b0d6bb741b29aeedf0309e72c82
+          created: 1744068158813
+          modified: 1744068164192
+          isPrivate: false
+          sortKey: -1743884512666.125
+        method: DELETE
+        body:
+          mimeType: application/json
         headers:
           - name: Content-Type
             value: application/json
@@ -559,6 +607,30 @@ collection:
             		}
             	]
             }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.baseURL }}/objetivos/2"
+        name: objetivo
+        meta:
+          id: req_c47c7e0d9b7747e888202b9fc6aaa74b
+          created: 1744068187066
+          modified: 1744068200636
+          isPrivate: false
+          sortKey: -1743886048161.25
+        method: DELETE
+        body:
+          mimeType: application/json
         headers:
           - name: Content-Type
             value: application/json

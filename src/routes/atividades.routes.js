@@ -199,4 +199,32 @@ router.put("/:id", (req, res) => {
     res.status(200).json(atividades[index]);
 });
 
+/**
+ * @swagger
+ * /atividades/{id}:
+ *   delete:
+ *     summary: Deleta uma atividade
+ *     tags: [Atividades]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID do objetivo
+ *     responses:
+ *       200:
+ *         description: Atividade deletada com sucesso
+ *       404:
+ *         description: Atividade não encontrado
+ */
+router.delete("/:id", (req, res) => {
+    const index = getIndex(atividades, req.params.id);
+    if (!atividades[index]) {
+        return res.status(404).json({ message: "Atividade não encontrado" });
+    }
+    atividades.splice(index, 1);
+    return res.status(200).json({message : "Atividade deletada com sucesso"});
+});
+
 export default router;
