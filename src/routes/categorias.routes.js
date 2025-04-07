@@ -55,11 +55,11 @@ router.post("/", (req, res)=>{
  */
 router.get("/:id", (req, res) => {
 
-    let categoria = categorias.find(categoria => categoria.id === parseInt(req.params.id));
-    if (!categoria) {
+    let index = getIndex(categorias, req.params.id);
+    if (!categorias[index]) {
         return res.status(404).json({ message: "Categoria não encontrada" });
     }
-    res.status(200).json(categoria);
+    res.status(200).json(categorias[index]);
 });
 
 /**

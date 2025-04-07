@@ -1,5 +1,6 @@
 import express from "express";
 import fs from "fs";
+import getIndex from "../utils/getItem.js";
 
 const router = express.Router();
 const pilares = JSON.parse(fs.readFileSync("./mocks/mockPilar.json", "utf8"));
@@ -41,11 +42,11 @@ router.get("/", (req, res) => {
  */
 router.get("/:id", (req, res) => {
 
-    let pilar = pilares.find(pilar => pilar.id === parseInt(req.params.id));
-    if (!pilar) {
+    let index = getIndex(pilares, req.params.id);
+    if (!pilares[index]) {
         return res.status(404).json({ message: "Pilar não encontrada" });
     }
-    res.status(200).json(pilar);
+    res.status(200).json(pilares[index]);
 });
 
 /**
