@@ -1,6 +1,9 @@
 import express from "express";
 import fs from "fs";
 import getIndex from "../utils/getItem.js";
+import Objetivo from "../../models/objetivo.js";
+import mongoose from "mongoose";
+
 
 const router = express.Router();
 
@@ -16,9 +19,17 @@ const objetivos = JSON.parse(fs.readFileSync("./mocks/mockObjetivo.json", "utf8"
  *       200:
  *         description: Exibe uma lista de objetivos já cadastrados na base
  */
-router.get("/", (req, res) => {
-    res.status(200).json(objetivos);
-});
+// router.get("/", (req, res) => {
+//     res.status(200).json(objetivos);
+// });
+router.get("/", async (req, res) => {
+    try {
+      const objetivos = await Objetivo.find();
+      res.status(200).json(objetivos);
+    } catch (error) {
+      res.status(500).json({ message: "Erro ao buscar objetivos", error });
+    }
+  });
 
 /**
  * @swagger
@@ -72,13 +83,34 @@ router.get("/status/:status", (req, res) => {
  *       404:
  *         description: Objetivo não encontrado
  */
-router.get("/:id", (req, res) => {
-    const index = getIndex(objetivos, req.params.id);
-    if (!objetivos[index]) {
-        return res.status(404).json({ message: "Objetivo não encontrado" });
+// router.get("/:id", (req, res) => {
+//     const index = getIndex(objetivos, req.params.id);
+//     if (!objetivos[index]) {
+//         return res.status(404).json({ message: "Objetivo não encontrado" });
+//     }
+//     res.status(200).json(objetivos[index]);
+// });
+
+router.get("/:id", async (req, res) => {
+    const { id } = req.params;
+  
+    // Verifica se é um ObjectId válido
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "ID inválido" });
     }
-    res.status(200).json(objetivos[index]);
-});
+  
+    try {
+      const objetivo = await Objetivo.findById(id);
+  
+      if (!objetivo) {
+        return res.status(404).json({ message: "Objetivo não encontrado" });
+      }
+  
+      res.status(200).json(objetivo);
+    } catch (error) {
+      res.status(500).json({ message: "Erro ao buscar objetivo", error });
+    }
+  });
 
 /**
  * @swagger
