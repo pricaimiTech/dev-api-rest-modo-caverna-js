@@ -44,6 +44,47 @@ router.post("/", async (req, res) => {
 
 /**
  * @swagger
+ * /atividades/diarias:
+ *   get:
+ *     summary: Lista atividades diárias, filtrando por concluídas ou não
+ *     tags: [Atividades]
+ *     parameters:
+ *       - in: query
+ *         name: concluidas
+ *         required: false
+ *         schema:
+ *           type: string
+ *           enum: [true, false]
+ *         description: Filtrar por atividades concluídas ou não
+ *     responses:
+ *       200:
+ *         description: Lista de tarefas diárias
+ */
+router.get("/diarias", async(req, res) => {
+    try {
+        const { concluidas } = req.query;
+
+        // Cria o filtro base: atividades diárias
+        const filtro = { isDiaria: true };
+
+        // Aplica filtro adicional se o parâmetro 'concluidas' for passado
+        if (concluidas === "true") {
+            filtro.isConclued = true;
+        } else if (concluidas === "false") {
+            filtro.isConclued = false;
+        }
+
+        // Busca no banco usando o filtro
+        const tarefasDiarias = await Atividade.find(filtro);
+        res.status(200).json(tarefasDiarias);
+
+    } catch (error) {
+        res.status(500).json({ message: "Erro ao buscar atividades diárias", error: error.message });
+    }
+});
+
+/**
+ * @swagger
  * /atividades/{id}:
  *   get:
  *     summary: Retorna uma atividade específica
@@ -71,37 +112,6 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-/**
- * @swagger
- * /atividades/diarias:
- *   get:
- *     summary: Lista atividades diárias, filtrando por concluídas ou não
- *     tags: [Atividades]
- *     parameters:
- *       - in: query
- *         name: concluidas
- *         required: false
- *         schema:
- *           type: string
- *           enum: [true, false]
- *         description: Filtrar por atividades concluídas ou não
- *     responses:
- *       200:
- *         description: Lista de tarefas diárias
- */
-router.get("/diarias", (req, res) => {
-    const { concluidas } = req.query;
-
-    let tarefasDiarias = atividades.filter(atividade => atividade.isDiaria);
-
-    if (concluidas === "true") {
-        tarefasDiarias = tarefasDiarias.filter(atividade => atividade.isConclued);
-    } else if (concluidas === "false") {
-        tarefasDiarias = tarefasDiarias.filter(atividade => !atividade.isConclued);
-    }
-
-    res.status(200).json(tarefasDiarias);
-});
 
 /**
  * @swagger
@@ -125,19 +135,19 @@ router.get("/diarias", (req, res) => {
 router.get("/categoria/:nome", async (req, res) => {
     try {
         const nome = req.params.nome.toLowerCase().toString();
-        const atividades = await Atividade.find({ 'categoria.title': nome });  // busca todos os objetivos com o status informado
-    
+        const atividades = await Atividade.find({ 'categoria.nome_categoria': nome });  // busca todos os objetivos com o status informado
+
         if (!atividades || atividades.length === 0) {
-          return res.status(404).json({ message: "Nenhum categoria encontrado com esse nome" });
+            return res.status(404).json({ message: "Nenhum categoria encontrado com esse nome" });
         }
-    
+
         res.status(200).json(atividades);
-      } catch (error) {
+    } catch (error) {
         res.status(500).json({
-          message: "Erro ao buscar categoria pelo nome",
-          error: error.message,
+            message: "Erro ao buscar categoria pelo nome",
+            error: error.message,
         });
-      }
+    }
 });
 
 /**
@@ -163,18 +173,18 @@ router.get("/categoria/id/:id", async (req, res) => {
     try {
         const categoriaID = req.params.id;
         const atividades = await Atividade.find({ "categoria.id": categoriaID }); // busca pilares que tenha o id do objetivo vinculado
-    
+
         if (!atividades || atividades.length === 0) {
-          return res.status(404).json({ message: "Nenhum categoria encontrado com esse id" });
+            return res.status(404).json({ message: "Nenhum categoria encontrado com esse id" });
         }
-    
+
         res.status(200).json(atividades);
-      } catch (error) {
+    } catch (error) {
         res.status(500).json({
-          message: "Erro ao buscar categoria pelo id",
-          error: error.message,
+            message: "Erro ao buscar categoria pelo id",
+            error: error.message,
         });
-      }
+    }
 });
 
 /**
@@ -211,9 +221,9 @@ router.put("/:id", async (req, res) => {
         const atividade = await Atividade.findByIdAndUpdate(req.params.id, req.body, { new: true });
         if (!atividade) return res.status(404).json({ message: "atividade não encontrado" });
         res.status(200).json(atividade);
-      } catch (error) {
+    } catch (error) {
         res.status(500).json({ message: "Erro ao atualizar atividade", error });
-      }
+    }
 });
 
 /**
