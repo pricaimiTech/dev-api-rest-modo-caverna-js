@@ -1,9 +1,6 @@
 import express from "express";
-import fs from "fs";
-import getIndex from "../utils/getItem.js";
-
+import Categoria from "../../models/Categoria.js";
 const router = express.Router();
-const categorias = JSON.parse(fs.readFileSync("./mocks/mockCategoria.json", "utf8"));
 
 /**
  * @swagger
@@ -15,8 +12,13 @@ const categorias = JSON.parse(fs.readFileSync("./mocks/mockCategoria.json", "utf
  *       200:
  *         description: Lista de categorias
  */
-router.get("/", (req, res) => {
-    res.status(200).json(categorias);
+router.get("/", async(req, res) => {
+    try {
+        const categorias = await Categoria.find();
+        res.status(200).json(categorias);
+    } catch (error) {
+        res.status(500).json({ message: "Erro ao buscar categorias", error });
+    }
 });
 
 /**
@@ -29,10 +31,14 @@ router.get("/", (req, res) => {
  *       201:
  *         description: Criou uma nova categoria
  */
-router.post("/", (req, res)=>{
-    categorias.push(req.body);
-    res.status(201).json(req.body);
-})
+router.post("/", async (req, res) => {
+    try {
+      const novaCategoria = await Categoria.create(req.body);
+      res.status(201).json(novaCategoria);
+    } catch (error) {
+      res.status(500).json({ message: "Erro ao criar categoria", error });
+    }
+  });
 
 /**
  * @swagger
@@ -53,13 +59,14 @@ router.post("/", (req, res)=>{
  *       404:
  *         description: Categoria não encontrada
  */
-router.get("/:id", (req, res) => {
-
-    let index = getIndex(categorias, req.params.id);
-    if (!categorias[index]) {
-        return res.status(404).json({ message: "Categoria não encontrada" });
-    }
-    res.status(200).json(categorias[index]);
+router.get("/:id", async(req, res) => {
+    try {
+        const categoria = await Categoria.findById(req.params.id);
+        if (!categoria) return res.status(404).json({ message: "Categoria não encontrado" });
+        res.status(200).json(categoria);
+      } catch (error) {
+        res.status(500).json({ message: "Erro a buscar categoria", error });
+      }
 });
 
 /**
@@ -81,18 +88,22 @@ router.get("/:id", (req, res) => {
  *       404:
  *         description: Nenhuma atividade encontrada
  */
-router.get("/pilar/:nome", (req, res) => {
-    const nomeCategoria = req.params.nome.toLowerCase();
-
-    const atividadesPorCategoria = atividades.filter(atividade =>
-        atividade.categoria.nome_categoria.toLowerCase() === nomeCategoria
-    );
-
-    if (atividadesPorCategoria.length === 0) {
-        return res.status(404).json({ message: "Nenhuma atividade encontrada para essa categoria" });
-    }
-
-    res.status(200).json(atividadesPorCategoria);
+router.get("/pilar/nome/:nome", async (req, res) => {
+    try {
+        const nome = req.params.nome.toLowerCase().toString();
+        const categorias = await Categoria.find({ 'pilar.title': nome });  // busca todos os objetivos com o status informado
+    
+        if (!categorias || categorias.length === 0) {
+          return res.status(404).json({ message: "Nenhum pilar encontrado com esse nome" });
+        }
+    
+        res.status(200).json(categorias);
+      } catch (error) {
+        res.status(500).json({
+          message: "Erro ao buscar Pilar pelo nome",
+          error: error.message,
+        });
+      }
 });
 
 /**
@@ -114,18 +125,22 @@ router.get("/pilar/:nome", (req, res) => {
  *       404:
  *         description: Nenhuma categoria encontrada
  */
-router.get("/pilar/id/:id", (req, res) => {
-    const idPilar = parseInt(req.params.id);
-
-    const categoriaPorPilar = categorias.filter(
-        categoria => categoria.pilar.id === idPilar
-    );
-
-    if (categoriaPorPilar.length === 0) {
-        return res.status(404).json({ message: "Nenhuma categoria encontrada para esse pilar" });
-    }
-
-    res.status(200).json(categoriaPorPilar);
+router.get("/pilar/id/:id", async (req, res) => {
+    try {
+        const pilarID = req.params.id;
+        const categorias = await Categoria.find({ "pilar.id": pilarID }); // busca pilares que tenha o id do objetivo vinculado
+    
+        if (!categorias || categorias.length === 0) {
+          return res.status(404).json({ message: "Nenhum pilar encontrado com esse status" });
+        }
+    
+        res.status(200).json(categorias);
+      } catch (error) {
+        res.status(500).json({
+          message: "Erro ao buscar pilar pelo status",
+          error: error.message,
+        });
+      }
 });
 
 
@@ -158,13 +173,14 @@ router.get("/pilar/id/:id", (req, res) => {
  *       404:
  *         description: Objetivo não encontrado
  */
-router.put("/:id", (req, res) => {
-    const index = getIndex(categorias, req.params.id);
-    if (!categorias[index]) {
-        return res.status(404).json({ message: "Categoria não encontrado" });
-    }
-    categorias[index].title = req.body.title;
-    res.status(200).json(categorias[index]);
+router.put("/:id", async (req, res) => {
+    try {
+        const categoria = await Categoria.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!categoria) return res.status(404).json({ message: "Categoria não encontrado" });
+        res.status(200).json(categoria);
+      } catch (error) {
+        res.status(500).json({ message: "Erro ao atualizar categoria", error });
+      }
 });
 
 
@@ -187,13 +203,14 @@ router.put("/:id", (req, res) => {
  *       404:
  *         description: Atividade não encontrado
  */
-router.delete("/:id", (req, res) => {
-    const index = getIndex(categorias, req.params.id);
-    if (!categorias[index]) {
-        return res.status(404).json({ message: "Categoria não encontrado" });
-    }
-    categorias.splice(index, 1);
-    res.status(200).json({message : "Categoria deletada com sucesso"});
+router.delete("/:id", async(req, res) => {
+    try {
+        const categoria = await Categoria.findByIdAndDelete(req.params.id);
+        if (!categoria) return res.status(404).json({ message: "Categoria não encontrado" });
+        res.status(200).json({ message: "Categoria deletado com sucesso" });
+      } catch (error) {
+        res.status(500).json({ message: "Erro ao deletar categoria", error });
+      }
 });
 
 

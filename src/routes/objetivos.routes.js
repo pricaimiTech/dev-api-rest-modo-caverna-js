@@ -16,13 +16,13 @@ const router = express.Router();
 //     res.status(200).json(objetivos);
 // });
 router.get("/", async (req, res) => {
-    try {
-      const objetivos = await Objetivo.find();
-      res.status(200).json(objetivos);
-    } catch (error) {
-      res.status(500).json({ message: "Erro ao buscar objetivos", error });
-    }
-  });
+  try {
+    const objetivos = await Objetivo.find();
+    res.status(200).json(objetivos);
+  } catch (error) {
+    res.status(500).json({ message: "Erro ao buscar objetivos", error });
+  }
+});
 
 /**
  * @swagger
@@ -43,7 +43,7 @@ router.get("/", async (req, res) => {
  *       404:
  *         description: Nenhum objetivo encontrado
  */
-router.get("/status/:status", async(req, res) => {
+router.get("/status/:status", async (req, res) => {
   try {
     const status = req.params.status;
     const objetivos = await Objetivo.find({ status }); // busca todos os objetivos com o status informado
@@ -96,7 +96,7 @@ router.get("/:id", async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: "Erro ao buscar objetivo", error });
   }
-  });
+});
 
 /**
  * @swagger
@@ -108,13 +108,13 @@ router.get("/:id", async (req, res) => {
  *       201:
  *         description: Criou um novo objetivo
  */
-router.post("/", async(req, res) => {
-    try {
-      const novoObjetivo = await Objetivo.create(req.body);
-      res.status(201).json(novoObjetivo);
-    } catch (error) {
-      res.status(500).json({ message: "Erro ao criar objetivo", error });
-    }
+router.post("/", async (req, res) => {
+  try {
+    const novoObjetivo = await Objetivo.create(req.body);
+    res.status(201).json(novoObjetivo);
+  } catch (error) {
+    res.status(500).json({ message: "Erro ao criar objetivo", error });
+  }
 });
 
 /**
@@ -146,15 +146,15 @@ router.post("/", async(req, res) => {
  *       404:
  *         description: Objetivo não encontrado
  */
-router.put("/:id", async(req, res) => {
-    try {
-      const objetivo = await Objetivo.findByIdAndUpdate(req.params.id, req.body, { new: true });
-      if (!objetivo) return res.status(404).json({ message: "Objetivo não encontrado" });
-      res.status(200).json(objetivo);
-    } catch (error) {
-      res.status(500).json({ message: "Erro ao atualizar objetivo", error });
-    }
-    
+router.put("/:id", async (req, res) => {
+  try {
+    const objetivo = await Objetivo.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!objetivo) return res.status(404).json({ message: "Objetivo não encontrado" });
+    res.status(200).json(objetivo);
+  } catch (error) {
+    res.status(500).json({ message: "Erro ao atualizar objetivo", error });
+  }
+
 });
 
 
@@ -177,7 +177,7 @@ router.put("/:id", async(req, res) => {
  *       404:
  *         description: Objetivo não encontrado
  */
-router.delete("/:id", async(req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const objetivo = await Objetivo.findByIdAndDelete(req.params.id);
     if (!objetivo) return res.status(404).json({ message: "Objetivo não encontrado" });

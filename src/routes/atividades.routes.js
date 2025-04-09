@@ -1,9 +1,7 @@
 import express from "express";
-import fs from "fs";
-import getIndex from "../utils/getItem.js";
+import Atividade from "../../models/Atividade.js";
 
 const router = express.Router();
-const atividades = JSON.parse(fs.readFileSync("./mocks/mockAtividade.json", "utf8"));
 
 
 /**
@@ -16,8 +14,13 @@ const atividades = JSON.parse(fs.readFileSync("./mocks/mockAtividade.json", "utf
  *       200:
  *         description: Lista de atividades
  */
-router.get("/", (req, res) => {
-    res.status(200).json(atividades);
+router.get("/", async (req, res) => {
+    try {
+        const atividades = await Atividade.find();
+        res.status(200).json(atividades);
+    } catch (error) {
+        res.status(500).json({ message: "Erro ao buscar atividades", error });
+    }
 });
 
 /**
@@ -30,9 +33,13 @@ router.get("/", (req, res) => {
  *       201:
  *         description: Criou uma nova atividade
  */
-router.post("/", (req, res)=>{
-    atividades.push(req.body);
-    res.status(201).json(req.body);
+router.post("/", async (req, res) => {
+    try {
+        const novaAtividade = await Atividade.create(req.body);
+        res.status(201).json(novaAtividade);
+    } catch (error) {
+        res.status(500).json({ message: "Erro ao criar nova atividade", error });
+    }
 })
 
 /**
@@ -54,13 +61,14 @@ router.post("/", (req, res)=>{
  *       404:
  *         description: Atividade não encontrada
  */
-router.get("/:id", (req, res) => {
-
-    let index = getIndex(atividades, req.params.id);
-    if (!atividades[index]) {
-        return res.status(404).json({ message: "Atividade não encontrada" });
+router.get("/:id", async (req, res) => {
+    try {
+        const atividade = await Atividade.findById(req.params.id);
+        if (!atividade) return res.status(404).json({ message: "Atividade não encontrado" });
+        res.status(200).json(atividade);
+    } catch (error) {
+        res.status(500).json({ message: "Erro ao buscar atividade", error });
     }
-    res.status(200).json(atividades[index]);
 });
 
 /**
@@ -114,18 +122,22 @@ router.get("/diarias", (req, res) => {
  *       404:
  *         description: Nenhuma atividade encontrada
  */
-router.get("/categoria/:nome", (req, res) => {
-    const nomeCategoria = req.params.nome.toLowerCase();
-
-    const atividadesPorCategoria = atividades.filter(atividade =>
-        atividade.categoria.nome_categoria.toLowerCase() === nomeCategoria
-    );
-
-    if (atividadesPorCategoria.length === 0) {
-        return res.status(404).json({ message: "Nenhuma atividade encontrada para essa categoria" });
-    }
-
-    res.status(200).json(atividadesPorCategoria);
+router.get("/categoria/:nome", async (req, res) => {
+    try {
+        const nome = req.params.nome.toLowerCase().toString();
+        const atividades = await Atividade.find({ 'categoria.title': nome });  // busca todos os objetivos com o status informado
+    
+        if (!atividades || atividades.length === 0) {
+          return res.status(404).json({ message: "Nenhum categoria encontrado com esse nome" });
+        }
+    
+        res.status(200).json(atividades);
+      } catch (error) {
+        res.status(500).json({
+          message: "Erro ao buscar categoria pelo nome",
+          error: error.message,
+        });
+      }
 });
 
 /**
@@ -147,18 +159,22 @@ router.get("/categoria/:nome", (req, res) => {
  *       404:
  *         description: Nenhuma atividade encontrada
  */
-router.get("/categoria/id/:id", (req, res) => {
-    const idCategoria = parseInt(req.params.id);
-
-    const atividadesPorCategoria = atividades.filter(
-        atividade => atividade.categoria.id === idCategoria
-    );
-
-    if (atividadesPorCategoria.length === 0) {
-        return res.status(404).json({ message: "Nenhuma atividade encontrada para essa categoria" });
-    }
-
-    res.status(200).json(atividadesPorCategoria);
+router.get("/categoria/id/:id", async (req, res) => {
+    try {
+        const categoriaID = req.params.id;
+        const atividades = await Atividade.find({ "categoria.id": categoriaID }); // busca pilares que tenha o id do objetivo vinculado
+    
+        if (!atividades || atividades.length === 0) {
+          return res.status(404).json({ message: "Nenhum categoria encontrado com esse id" });
+        }
+    
+        res.status(200).json(atividades);
+      } catch (error) {
+        res.status(500).json({
+          message: "Erro ao buscar categoria pelo id",
+          error: error.message,
+        });
+      }
 });
 
 /**
@@ -190,13 +206,14 @@ router.get("/categoria/id/:id", (req, res) => {
  *       404:
  *         description: Atividade não encontrado
  */
-router.put("/:id", (req, res) => {
-    const index = getIndex(atividades, req.params.id);
-    if (!atividades[index]) {
-        return res.status(404).json({ message: "Atividade não encontrado" });
-    }
-    atividades[index].title = req.body.title;
-    res.status(200).json(atividades[index]);
+router.put("/:id", async (req, res) => {
+    try {
+        const atividade = await Atividade.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!atividade) return res.status(404).json({ message: "atividade não encontrado" });
+        res.status(200).json(atividade);
+      } catch (error) {
+        res.status(500).json({ message: "Erro ao atualizar atividade", error });
+      }
 });
 
 /**
@@ -218,13 +235,14 @@ router.put("/:id", (req, res) => {
  *       404:
  *         description: Atividade não encontrado
  */
-router.delete("/:id", (req, res) => {
-    const index = getIndex(atividades, req.params.id);
-    if (!atividades[index]) {
-        return res.status(404).json({ message: "Atividade não encontrado" });
+router.delete("/:id", async (req, res) => {
+    try {
+        const atividade = await Atividade.findByIdAndDelete(req.params.id);
+        if (!atividade) return res.status(404).json({ message: "atividade não encontrado" });
+        res.status(200).json({ message: "atividade deletado com sucesso" });
+    } catch (error) {
+        res.status(500).json({ message: "Erro ao deletar atividade", error });
     }
-    atividades.splice(index, 1);
-    return res.status(200).json({message : "Atividade deletada com sucesso"});
 });
 
 export default router;
