@@ -21,6 +21,9 @@ Aplicativo destinado a construir uma API Rest para um aplicativo de modo caverna
 - Node.js
 - Figma
 - Swagger
+- MondoDB
+- mongoose
+- dotenv
 
 --- 
 ## Projeto 

@@ -32,12 +32,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.baseURL }}/atividades/diarias"
+      - url: "{{ _.baseURL }}/atividades/diarias?isDiaria=true"
         name: atividade/diaria
         meta:
           id: req_7ffb422488e74204879ae0c3e75bd3ed
           created: 1743884158117
-          modified: 1743946585498
+          modified: 1744241639639
           isPrivate: false
           sortKey: -1743882879650
         method: GET
@@ -52,12 +52,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.baseURL }}/atividades/diarias?concluidas=true"
+      - url: "{{ _.baseURL }}/atividades/diarias?concluidas=false"
         name: atividade/diaria?isConcluida
         meta:
           id: req_510135aa368d4132ae07095b2eb89330
           created: 1743884333142
-          modified: 1743946591837
+          modified: 1744241942223
           isPrivate: false
           sortKey: -1743882243849
         method: GET
@@ -72,12 +72,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.baseURL }}/atividades/2"
+      - url: "{{ _.baseURL }}/atividades/67f5c077c7f13407bcb064c6"
         name: atividade/id
         meta:
           id: req_74d7bc640f66474db4b54a04f4534f5c
           created: 1743884667569
-          modified: 1744067917473
+          modified: 1744158850325
           isPrivate: false
           sortKey: -1743883515451
         method: GET
@@ -97,7 +97,7 @@ collection:
         meta:
           id: req_e53400b59da741e2ab4fb725ed1c32d2
           created: 1743885407043
-          modified: 1743946569829
+          modified: 1744241615969
           isPrivate: false
           sortKey: -1743883197550.5
         method: GET
@@ -117,7 +117,7 @@ collection:
         meta:
           id: req_566784db89c14fd398f3e6227b0260cb
           created: 1743885477355
-          modified: 1743946578281
+          modified: 1744241345003
           isPrivate: false
           sortKey: -1743883038600.25
         method: GET
@@ -137,7 +137,7 @@ collection:
         meta:
           id: req_dc0975ec3de946af9b230db548dbf484
           created: 1743943454326
-          modified: 1743946557348
+          modified: 1744241281843
           isPrivate: false
           sortKey: -1743883833351.5
         method: POST
@@ -146,11 +146,11 @@ collection:
           text: |-
             {
             	"id": 4,
-            	"title": "atividade nova criada",
+            	"title": "deletar atividade",
             	"descrição": "string",
             	"icone": "string",
-            	"isConclued": false,
-            	"isDiaria": true,
+            	"isConclued": true,
+            	"isDiaria": false,
             	"categoria": {
             		"id": 1,
             		"nome_categoria": "exercicio",
@@ -175,12 +175,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.baseURL }}/atividades/2"
+      - url: "{{ _.baseURL }}/atividades/67f5c077c7f13407bcb064c6"
         name: atividade
         meta:
           id: req_a70c83bf13be4ef38c44860bebbfeb4d
           created: 1743948693850
-          modified: 1744067835279
+          modified: 1744241260137
           isPrivate: false
           sortKey: -1743883674401.25
         method: PUT
@@ -188,23 +188,25 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"id": 1,
-            	"title": "atividade atualizada",
-            	"descrição": "string",
-            	"icone": "string",
-            	"isConclued": false,
-            	"isDiaria": true,
-            	"categoria": {
-            		"id": 1,
-            		"nome_categoria": "exercicio",
-            		"descricao_categoria": "string",
-            		"pilar": {
-            			"id": 2,
-            			"title": "obrigatorio",
-            			"descricao_pilar": "string"
-            		}
+            		"_id": "67f5c077c7f13407bcb064c6",
+            		"id": 4,
+            		"title": "atividade nova criada diaria",
+            		"descrição": "string",
+            		"icone": "string",
+            		"isConclued": false,
+            		"isDiaria": true,
+            		"categoria": {
+            			"id": 1,
+            			"nome_categoria": "exercicio",
+            			"descricao_categoria": "string",
+            			"pilar": {
+            				"id": 2,
+            				"title": "obrigatorio",
+            				"descricao_pilar": "string"
+            			}
+            		},
+            		"__v": 0
             	}
-            }
         headers:
           - name: Content-Type
             value: application/json
@@ -218,12 +220,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.baseURL }}/atividades/3"
+      - url: "{{ _.baseURL }}/atividades/67f7028371f4c1f8212af8f1"
         name: atividade
         meta:
           id: req_d5ef9bd659544f8081ee85d8d2fd005c
           created: 1744067690722
-          modified: 1744068272058
+          modified: 1744241289309
           isPrivate: false
           sortKey: -1743883594926.125
         method: DELETE
@@ -269,12 +271,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.baseURL }}/categorias/1"
+      - url: "{{ _.baseURL }}/categorias/67f5bbac299481537519222a"
         name: categoria/id
         meta:
           id: req_1f323a554b5740ffa5025ade00897e63
           created: 1743884803319
-          modified: 1743885958474
+          modified: 1744157628103
           isPrivate: false
           sortKey: -1743884472509
         method: GET
@@ -289,12 +291,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.baseURL }}/categorias/pilar/id/2"
-        name: categoria/pilar/id
+      - url: "{{ _.baseURL }}/categorias/pilar/nome/flexivel"
+        name: categoria/pilar/nome
         meta:
           id: req_71ec575f18c740f4a2016850a97a822d
           created: 1743885748108
-          modified: 1743885918677
+          modified: 1744158233816
           isPrivate: false
           sortKey: -1743884311880.5
         method: GET
@@ -348,12 +350,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.baseURL }}/categorias/4"
+      - url: "{{ _.baseURL }}/categorias/67f5bbac299481537519222a"
         name: categoria
         meta:
           id: req_4eb050800e3c48e7a3da61765de8e299
           created: 1743948513256
-          modified: 1743948535211
+          modified: 1744157680154
           isPrivate: false
           sortKey: -1743884552823.25
         method: PUT
@@ -362,7 +364,7 @@ collection:
           text: >-
             	{
             		"id": 4,
-            		"title": "flexivel atualizado",
+            		"title": "Categoira atualizada via banco de dados",
             		"descrição": "string",
             		"icone": "string",
             		"pilar": {
@@ -387,12 +389,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.baseURL }}/categorias/4"
+      - url: "{{ _.baseURL }}/categorias/67f5bbac299481537519222a"
         name: categoria
         meta:
           id: req_16df1b0d6bb741b29aeedf0309e72c82
           created: 1744068158813
-          modified: 1744068164192
+          modified: 1744158316795
           isPrivate: false
           sortKey: -1743884512666.125
         method: DELETE
@@ -411,6 +413,26 @@ collection:
             send: true
             store: true
           rebuildPath: true
+      - url: "{{ _.baseURL }}/categorias/pilar/id/1"
+        name: categoria/pilar/id
+        meta:
+          id: req_7b41d505a7d948fa90fe62047b0e3bdd
+          created: 1744158141595
+          modified: 1744158144871
+          isPrivate: false
+          sortKey: -1743884231566.25
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
   - name: objetivo
     meta:
       id: fld_ea070a28b3824829ab703653add72bc8
@@ -418,12 +440,12 @@ collection:
       modified: 1743887019689
       sortKey: -1743887019689
     children:
-      - url: "{{ _.baseURL }}/objetivos"
+      - url: "{{ _.baseURL }}/objetivos/"
         name: objetivo
         meta:
           id: req_b77d1306cd4a47fbb3576b8cdb6d349f
           created: 1743881628968
-          modified: 1743946348444
+          modified: 1744072216305
           isPrivate: false
           sortKey: -1743887023802
         method: GET
@@ -438,12 +460,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.baseURL }}/objetivos/2"
+      - url: "{{ _.baseURL }}/objetivos/67f5b2df24cec7967ad2e5a3"
         name: objetivo/id
         meta:
           id: req_7e8efc4721684e9c8da9f5fcd1b29ec9
           created: 1743888059525
-          modified: 1743948188284
+          modified: 1744155369726
           isPrivate: false
           sortKey: -1743885908784
         method: GET
@@ -458,12 +480,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.baseURL }}/objetivos/status/EM_ANDAMENTO"
+      - url: "{{ _.baseURL }}/objetivos/status/INICIAR"
         name: objetivo?status
         meta:
           id: req_9373e7b8442648d8b507abaead984b3f
           created: 1743888083924
-          modified: 1743888574627
+          modified: 1744155489535
           isPrivate: false
           sortKey: -1743885351275
         method: GET
@@ -483,7 +505,7 @@ collection:
         meta:
           id: req_90d0dfce6c5347e5a7f578b093cd5926
           created: 1743942758658
-          modified: 1743946379512
+          modified: 1744155357199
           isPrivate: false
           sortKey: -1743886466293
         method: POST
@@ -491,8 +513,8 @@ collection:
           mimeType: application/json
           text: >-
             {
-            	"id": 5,
-            	"title": "Criando um segundo novo objetivo",
+            	"id": 1,
+            	"title": "Criando o primeiro objetivo com a integração com banco de dados",
             	"descrição": "",
             	"icone": "",
             	"andamento": "calculo com base atividades flexível em cima do prazo",
@@ -549,12 +571,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.baseURL }}/objetivos/2"
+      - url: "{{ _.baseURL }}/objetivos/67f5b0b83b8de7153c041f4d"
         name: objetivo
         meta:
           id: req_1092b32cf52644029e6164bd64844363
           created: 1743947588356
-          modified: 1743948211667
+          modified: 1744154879215
           isPrivate: false
           sortKey: -1743886187538.5
         method: PUT
@@ -563,7 +585,7 @@ collection:
           text: >-
             {
             	"id": 1,
-            	"title": "Objetivo SMART versão 2",
+            	"title": "Objetivo atualizado pela integração com banco de dados",
             	"descrição": "",
             	"icone": "",
             	"andamento": "calculo com base atividades flexível em cima do prazo",
@@ -620,12 +642,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.baseURL }}/objetivos/2"
+      - url: "{{ _.baseURL }}/objetivos/67f5b0b83b8de7153c041f4d"
         name: objetivo
         meta:
           id: req_c47c7e0d9b7747e888202b9fc6aaa74b
           created: 1744068187066
-          modified: 1744068200636
+          modified: 1744154897361
           isPrivate: false
           sortKey: -1743886048161.25
         method: DELETE
@@ -671,12 +693,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.baseURL }}/pilares/2"
+      - url: "{{ _.baseURL }}/pilares/67f5b8242cf33bca6969b209"
         name: pilar/id
         meta:
           id: req_ab2c90694fa5476ab6b39a4d9fe34b30
           created: 1743887118501
-          modified: 1743887153849
+          modified: 1744156713617
           isPrivate: false
           sortKey: -1743887067062
         method: GET
@@ -691,16 +713,81 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.baseURL }}/pilares/objetivo/id/1"
+      - url: "{{ _.baseURL }}/pilares/objetivo/objetivo"
         name: pilar/objetivo/id
         meta:
           id: req_da1e1bf03f1c4d3aa0b8930434c421ef
           created: 1743887180517
-          modified: 1743887185265
+          modified: 1744157962875
           isPrivate: false
           sortKey: -1743887045432
         method: GET
         headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.baseURL }}/pilares"
+        name: pilar
+        meta:
+          id: req_6414496ad33f4eba983f3d379df38bc8
+          created: 1744156670924
+          modified: 1744156706573
+          isPrivate: false
+          sortKey: -1743887088692
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"id": 1,
+            	"title": "pilar criado via integração com banco",
+            	"descrição": "",
+            	"icone": "",
+            	"categoria": [],
+            	"objetivo": {
+            		"id": 2,
+            		"title": "objetivo",
+            		"descricao": "string"
+            	}
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.baseURL }}/pilares/67f5b8242cf33bca6969b209"
+        name: pilar/id
+        meta:
+          id: req_6a1ed287266f46a29ecda25be5d0284a
+          created: 1744156726206
+          modified: 1744156765793
+          isPrivate: false
+          sortKey: -1743887056247
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"title": "pilar atualizado via integração com banco"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
           - name: User-Agent
             value: insomnia/11.0.2
         settings:

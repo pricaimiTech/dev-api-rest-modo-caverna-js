@@ -1,9 +1,7 @@
 import express from "express";
-import fs from "fs";
-import getIndex from "../utils/getItem.js";
+import Atividade from "../../models/Atividade.js";
 
 const router = express.Router();
-const atividades = JSON.parse(fs.readFileSync("./mocks/mockAtividade.json", "utf8"));
 
 
 /**
@@ -16,8 +14,13 @@ const atividades = JSON.parse(fs.readFileSync("./mocks/mockAtividade.json", "utf
  *       200:
  *         description: Lista de atividades
  */
-router.get("/", (req, res) => {
-    res.status(200).json(atividades);
+router.get("/", async (req, res) => {
+    try {
+        const atividades = await Atividade.find();
+        res.status(200).json(atividades);
+    } catch (error) {
+        res.status(500).json({ message: "Erro ao buscar atividades", error });
+    }
 });
 
 /**
@@ -30,10 +33,55 @@ router.get("/", (req, res) => {
  *       201:
  *         description: Criou uma nova atividade
  */
-router.post("/", (req, res)=>{
-    atividades.push(req.body);
-    res.status(201).json(req.body);
+router.post("/", async (req, res) => {
+    try {
+        const novaAtividade = await Atividade.create(req.body);
+        res.status(201).json(novaAtividade);
+    } catch (error) {
+        res.status(500).json({ message: "Erro ao criar nova atividade", error });
+    }
 })
+
+/**
+ * @swagger
+ * /atividades/diarias:
+ *   get:
+ *     summary: Lista atividades diárias, filtrando por concluídas ou não
+ *     tags: [Atividades]
+ *     parameters:
+ *       - in: query
+ *         name: concluidas
+ *         required: false
+ *         schema:
+ *           type: string
+ *           enum: [true, false]
+ *         description: Filtrar por atividades concluídas ou não
+ *     responses:
+ *       200:
+ *         description: Lista de tarefas diárias
+ */
+router.get("/diarias", async(req, res) => {
+    try {
+        const { concluidas } = req.query;
+
+        // Cria o filtro base: atividades diárias
+        const filtro = { isDiaria: true };
+
+        // Aplica filtro adicional se o parâmetro 'concluidas' for passado
+        if (concluidas === "true") {
+            filtro.isConclued = true;
+        } else if (concluidas === "false") {
+            filtro.isConclued = false;
+        }
+
+        // Busca no banco usando o filtro
+        const tarefasDiarias = await Atividade.find(filtro);
+        res.status(200).json(tarefasDiarias);
+
+    } catch (error) {
+        res.status(500).json({ message: "Erro ao buscar atividades diárias", error: error.message });
+    }
+});
 
 /**
  * @swagger
@@ -54,46 +102,16 @@ router.post("/", (req, res)=>{
  *       404:
  *         description: Atividade não encontrada
  */
-router.get("/:id", (req, res) => {
-
-    let index = getIndex(atividades, req.params.id);
-    if (!atividades[index]) {
-        return res.status(404).json({ message: "Atividade não encontrada" });
+router.get("/:id", async (req, res) => {
+    try {
+        const atividade = await Atividade.findById(req.params.id);
+        if (!atividade) return res.status(404).json({ message: "Atividade não encontrado" });
+        res.status(200).json(atividade);
+    } catch (error) {
+        res.status(500).json({ message: "Erro ao buscar atividade", error });
     }
-    res.status(200).json(atividades[index]);
 });
 
-/**
- * @swagger
- * /atividades/diarias:
- *   get:
- *     summary: Lista atividades diárias, filtrando por concluídas ou não
- *     tags: [Atividades]
- *     parameters:
- *       - in: query
- *         name: concluidas
- *         required: false
- *         schema:
- *           type: string
- *           enum: [true, false]
- *         description: Filtrar por atividades concluídas ou não
- *     responses:
- *       200:
- *         description: Lista de tarefas diárias
- */
-router.get("/diarias", (req, res) => {
-    const { concluidas } = req.query;
-
-    let tarefasDiarias = atividades.filter(atividade => atividade.isDiaria);
-
-    if (concluidas === "true") {
-        tarefasDiarias = tarefasDiarias.filter(atividade => atividade.isConclued);
-    } else if (concluidas === "false") {
-        tarefasDiarias = tarefasDiarias.filter(atividade => !atividade.isConclued);
-    }
-
-    res.status(200).json(tarefasDiarias);
-});
 
 /**
  * @swagger
@@ -114,18 +132,22 @@ router.get("/diarias", (req, res) => {
  *       404:
  *         description: Nenhuma atividade encontrada
  */
-router.get("/categoria/:nome", (req, res) => {
-    const nomeCategoria = req.params.nome.toLowerCase();
+router.get("/categoria/:nome", async (req, res) => {
+    try {
+        const nome = req.params.nome.toLowerCase().toString();
+        const atividades = await Atividade.find({ 'categoria.nome_categoria': nome });  // busca todos os objetivos com o status informado
 
-    const atividadesPorCategoria = atividades.filter(atividade =>
-        atividade.categoria.nome_categoria.toLowerCase() === nomeCategoria
-    );
+        if (!atividades || atividades.length === 0) {
+            return res.status(404).json({ message: "Nenhum categoria encontrado com esse nome" });
+        }
 
-    if (atividadesPorCategoria.length === 0) {
-        return res.status(404).json({ message: "Nenhuma atividade encontrada para essa categoria" });
+        res.status(200).json(atividades);
+    } catch (error) {
+        res.status(500).json({
+            message: "Erro ao buscar categoria pelo nome",
+            error: error.message,
+        });
     }
-
-    res.status(200).json(atividadesPorCategoria);
 });
 
 /**
@@ -147,18 +169,22 @@ router.get("/categoria/:nome", (req, res) => {
  *       404:
  *         description: Nenhuma atividade encontrada
  */
-router.get("/categoria/id/:id", (req, res) => {
-    const idCategoria = parseInt(req.params.id);
+router.get("/categoria/id/:id", async (req, res) => {
+    try {
+        const categoriaID = req.params.id;
+        const atividades = await Atividade.find({ "categoria.id": categoriaID }); // busca pilares que tenha o id do objetivo vinculado
 
-    const atividadesPorCategoria = atividades.filter(
-        atividade => atividade.categoria.id === idCategoria
-    );
+        if (!atividades || atividades.length === 0) {
+            return res.status(404).json({ message: "Nenhum categoria encontrado com esse id" });
+        }
 
-    if (atividadesPorCategoria.length === 0) {
-        return res.status(404).json({ message: "Nenhuma atividade encontrada para essa categoria" });
+        res.status(200).json(atividades);
+    } catch (error) {
+        res.status(500).json({
+            message: "Erro ao buscar categoria pelo id",
+            error: error.message,
+        });
     }
-
-    res.status(200).json(atividadesPorCategoria);
 });
 
 /**
@@ -190,13 +216,14 @@ router.get("/categoria/id/:id", (req, res) => {
  *       404:
  *         description: Atividade não encontrado
  */
-router.put("/:id", (req, res) => {
-    const index = getIndex(atividades, req.params.id);
-    if (!atividades[index]) {
-        return res.status(404).json({ message: "Atividade não encontrado" });
+router.put("/:id", async (req, res) => {
+    try {
+        const atividade = await Atividade.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!atividade) return res.status(404).json({ message: "atividade não encontrado" });
+        res.status(200).json(atividade);
+    } catch (error) {
+        res.status(500).json({ message: "Erro ao atualizar atividade", error });
     }
-    atividades[index].title = req.body.title;
-    res.status(200).json(atividades[index]);
 });
 
 /**
@@ -218,13 +245,14 @@ router.put("/:id", (req, res) => {
  *       404:
  *         description: Atividade não encontrado
  */
-router.delete("/:id", (req, res) => {
-    const index = getIndex(atividades, req.params.id);
-    if (!atividades[index]) {
-        return res.status(404).json({ message: "Atividade não encontrado" });
+router.delete("/:id", async (req, res) => {
+    try {
+        const atividade = await Atividade.findByIdAndDelete(req.params.id);
+        if (!atividade) return res.status(404).json({ message: "atividade não encontrado" });
+        res.status(200).json({ message: "atividade deletado com sucesso" });
+    } catch (error) {
+        res.status(500).json({ message: "Erro ao deletar atividade", error });
     }
-    atividades.splice(index, 1);
-    return res.status(200).json({message : "Atividade deletada com sucesso"});
 });
 
 export default router;

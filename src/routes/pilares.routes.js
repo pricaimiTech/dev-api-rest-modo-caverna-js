@@ -1,9 +1,6 @@
 import express from "express";
-import fs from "fs";
-import getIndex from "../utils/getItem.js";
-
+import Pilar from "../../models/Pilar.js";
 const router = express.Router();
-const pilares = JSON.parse(fs.readFileSync("./mocks/mockPilar.json", "utf8"));
 
 
 /**
@@ -16,8 +13,14 @@ const pilares = JSON.parse(fs.readFileSync("./mocks/mockPilar.json", "utf8"));
  *       200:
  *         description: Lista de pilares
  */
-router.get("/", (req, res) => {
-    res.status(200).json(pilares);
+router.get("/", async(req, res) => {
+    try {
+        const pilares = await Pilar.find();
+        res.status(200).json(pilares);
+    } catch (error) {
+        res.status(500).json({ message: "Erro ao buscar pilares", error });
+        
+    }
 });
 
 
@@ -40,13 +43,15 @@ router.get("/", (req, res) => {
  *       404:
  *         description: Pilar não encontrado
  */
-router.get("/:id", (req, res) => {
-
-    let index = getIndex(pilares, req.params.id);
-    if (!pilares[index]) {
-        return res.status(404).json({ message: "Pilar não encontrada" });
-    }
-    res.status(200).json(pilares[index]);
+router.get("/:id", async(req, res) => {
+    try {
+        const pilar = await Pilar.findById(req.params.id);
+        if (!pilar) return res.status(404).json({ message: "Pilar não encontrado" });
+        res.status(200).json(pilar);
+      } catch (error) {
+        res.status(500).json({ message: "Erro ao buscar pilar", error });
+      }
+    
 });
 
 /**
@@ -68,18 +73,22 @@ router.get("/:id", (req, res) => {
  *       404:
  *         description: Nenhum pilar encontrado
  */
-router.get("/objetivo/:nome", (req, res) => {
-    const nomeObjetivo = req.params.nome.toLowerCase();
-
-    const pilarePorObjetivo = pilares.filter(pilar =>
-        pilar.objetivo.title.toLowerCase() === nomeObjetivo
-    );
-
-    if (pilarePorObjetivo.length === 0) {
-        return res.status(404).json({ message: "Nenhuma pilar encontrada para esse objetivo" });
-    }
-
-    res.status(200).json(pilarePorObjetivo);
+router.get("/objetivo/:nome", async(req, res) => {
+      try {
+        const nome = req.params.nome.toLowerCase();
+        const pilares = await Pilar.find({ 'objetivo.title': nome }); // busca todos os objetivos com o status informado
+    
+        if (!pilares || pilares.length === 0) {
+          return res.status(404).json({ message: "Nenhum Pilar encontrado com esse status" });
+        }
+    
+        res.status(200).json(pilares);
+      } catch (error) {
+        res.status(500).json({
+          message: "Erro ao buscar pilar pelo nome",
+          error: error.message,
+        });
+      }
 });
 
 /**
@@ -101,18 +110,22 @@ router.get("/objetivo/:nome", (req, res) => {
  *       404:
  *         description: Nenhum pilar encontrado
  */
-router.get("/objetivo/id/:id", (req, res) => {
-    const idObjetivo = parseInt(req.params.id);
-
-    const objetivoPorPilar = pilares.filter(
-        pilar => pilar.objetivo.id === idObjetivo
-    );
-
-    if (objetivoPorPilar.length === 0) {
-        return res.status(404).json({ message: "Nenhuma pilar encontrado para esse objetivo" });
-    }
-
-    res.status(200).json(objetivoPorPilar);
+router.get("/objetivo/id/:id", async(req, res) => {
+    try {
+        const objetivo = req.params.id;
+        const pilares = await Pilar.find({ "objetivo.id": objetivo }); // busca pilares que tenha o id do objetivo vinculado
+    
+        if (!pilares || pilares.length === 0) {
+          return res.status(404).json({ message: "Nenhum pilar encontrado com esse status" });
+        }
+    
+        res.status(200).json(pilares);
+      } catch (error) {
+        res.status(500).json({
+          message: "Erro ao buscar pilar pelo status",
+          error: error.message,
+        });
+      }
 });
 
 export default router;
