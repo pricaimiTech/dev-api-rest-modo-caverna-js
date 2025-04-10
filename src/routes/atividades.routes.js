@@ -1,5 +1,5 @@
 import express from "express";
-import Atividade from "../../models/Atividade.js";
+import AtividadeController from "../../controllers/atividadeController.js";
 
 const router = express.Router();
 
@@ -14,14 +14,7 @@ const router = express.Router();
  *       200:
  *         description: Lista de atividades
  */
-router.get("/", async (req, res) => {
-    try {
-        const atividades = await Atividade.find();
-        res.status(200).json(atividades);
-    } catch (error) {
-        res.status(500).json({ message: "Erro ao buscar atividades", error });
-    }
-});
+router.get("/", AtividadeController.getAll);
 
 /**
  * @swagger
@@ -33,14 +26,7 @@ router.get("/", async (req, res) => {
  *       201:
  *         description: Criou uma nova atividade
  */
-router.post("/", async (req, res) => {
-    try {
-        const novaAtividade = await Atividade.create(req.body);
-        res.status(201).json(novaAtividade);
-    } catch (error) {
-        res.status(500).json({ message: "Erro ao criar nova atividade", error });
-    }
-})
+router.post("/", AtividadeController.createAtividade);
 
 /**
  * @swagger
@@ -60,28 +46,7 @@ router.post("/", async (req, res) => {
  *       200:
  *         description: Lista de tarefas diárias
  */
-router.get("/diarias", async(req, res) => {
-    try {
-        const { concluidas } = req.query;
-
-        // Cria o filtro base: atividades diárias
-        const filtro = { isDiaria: true };
-
-        // Aplica filtro adicional se o parâmetro 'concluidas' for passado
-        if (concluidas === "true") {
-            filtro.isConclued = true;
-        } else if (concluidas === "false") {
-            filtro.isConclued = false;
-        }
-
-        // Busca no banco usando o filtro
-        const tarefasDiarias = await Atividade.find(filtro);
-        res.status(200).json(tarefasDiarias);
-
-    } catch (error) {
-        res.status(500).json({ message: "Erro ao buscar atividades diárias", error: error.message });
-    }
-});
+router.get("/diarias", AtividadeController.getDiarias);
 
 /**
  * @swagger
@@ -102,90 +67,7 @@ router.get("/diarias", async(req, res) => {
  *       404:
  *         description: Atividade não encontrada
  */
-router.get("/:id", async (req, res) => {
-    try {
-        const atividade = await Atividade.findById(req.params.id);
-        if (!atividade) return res.status(404).json({ message: "Atividade não encontrado" });
-        res.status(200).json(atividade);
-    } catch (error) {
-        res.status(500).json({ message: "Erro ao buscar atividade", error });
-    }
-});
-
-
-/**
- * @swagger
- * /atividades/categoria/{nome}:
- *   get:
- *     summary: Lista atividades por nome da categoria
- *     tags: [Atividades]
- *     parameters:
- *       - in: path
- *         name: nome
- *         required: true
- *         schema:
- *           type: string
- *         description: Nome da categoria
- *     responses:
- *       200:
- *         description: Lista de atividades
- *       404:
- *         description: Nenhuma atividade encontrada
- */
-router.get("/categoria/:nome", async (req, res) => {
-    try {
-        const nome = req.params.nome.toLowerCase().toString();
-        const atividades = await Atividade.find({ 'categoria.nome_categoria': nome });  // busca todos os objetivos com o status informado
-
-        if (!atividades || atividades.length === 0) {
-            return res.status(404).json({ message: "Nenhum categoria encontrado com esse nome" });
-        }
-
-        res.status(200).json(atividades);
-    } catch (error) {
-        res.status(500).json({
-            message: "Erro ao buscar categoria pelo nome",
-            error: error.message,
-        });
-    }
-});
-
-/**
- * @swagger
- * /atividades/categoria/id/{id}:
- *   get:
- *     summary: Lista atividades por ID da categoria
- *     tags: [Atividades]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: ID da categoria
- *     responses:
- *       200:
- *         description: Lista de atividades
- *       404:
- *         description: Nenhuma atividade encontrada
- */
-router.get("/categoria/id/:id", async (req, res) => {
-    try {
-        const categoriaID = req.params.id;
-        const atividades = await Atividade.find({ "categoria.id": categoriaID }); // busca pilares que tenha o id do objetivo vinculado
-
-        if (!atividades || atividades.length === 0) {
-            return res.status(404).json({ message: "Nenhum categoria encontrado com esse id" });
-        }
-
-        res.status(200).json(atividades);
-    } catch (error) {
-        res.status(500).json({
-            message: "Erro ao buscar categoria pelo id",
-            error: error.message,
-        });
-    }
-});
+router.get("/:id", AtividadeController.getById);
 
 /**
  * @swagger
@@ -216,15 +98,7 @@ router.get("/categoria/id/:id", async (req, res) => {
  *       404:
  *         description: Atividade não encontrado
  */
-router.put("/:id", async (req, res) => {
-    try {
-        const atividade = await Atividade.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        if (!atividade) return res.status(404).json({ message: "atividade não encontrado" });
-        res.status(200).json(atividade);
-    } catch (error) {
-        res.status(500).json({ message: "Erro ao atualizar atividade", error });
-    }
-});
+router.put("/:id", AtividadeController.updateAtividade);
 
 /**
  * @swagger
@@ -245,14 +119,6 @@ router.put("/:id", async (req, res) => {
  *       404:
  *         description: Atividade não encontrado
  */
-router.delete("/:id", async (req, res) => {
-    try {
-        const atividade = await Atividade.findByIdAndDelete(req.params.id);
-        if (!atividade) return res.status(404).json({ message: "atividade não encontrado" });
-        res.status(200).json({ message: "atividade deletado com sucesso" });
-    } catch (error) {
-        res.status(500).json({ message: "Erro ao deletar atividade", error });
-    }
-});
+router.delete("/:id", AtividadeController.deleteAtividade);
 
 export default router;
