@@ -1,5 +1,5 @@
 import express from "express";
-import Objetivo from "../../models/objetivo.js";
+import ObjetivoController from "../../controllers/objetivoController.js";
 const router = express.Router();
 
 /**
@@ -15,14 +15,19 @@ const router = express.Router();
 // router.get("/", (req, res) => {
 //     res.status(200).json(objetivos);
 // });
-router.get("/", async (req, res) => {
-  try {
-    const objetivos = await Objetivo.find();
-    res.status(200).json(objetivos);
-  } catch (error) {
-    res.status(500).json({ message: "Erro ao buscar objetivos", error });
-  }
-});
+router.get("/", ObjetivoController.getAll);
+
+/**
+ * @swagger
+ * /objetivos:
+ *   post:
+ *     summary: Cria um novo objetivo
+ *     tags: [Objetivos]
+ *     responses:
+ *       201:
+ *         description: Criou um novo objetivo
+ */
+router.post("/", ObjetivoController.createObjetivo);
 
 /**
  * @swagger
@@ -43,23 +48,7 @@ router.get("/", async (req, res) => {
  *       404:
  *         description: Nenhum objetivo encontrado
  */
-router.get("/status/:status", async (req, res) => {
-  try {
-    const status = req.params.status;
-    const objetivos = await Objetivo.find({ status }); // busca todos os objetivos com o status informado
-
-    if (!objetivos || objetivos.length === 0) {
-      return res.status(404).json({ message: "Nenhum objetivo encontrado com esse status" });
-    }
-
-    res.status(200).json(objetivos);
-  } catch (error) {
-    res.status(500).json({
-      message: "Erro ao buscar objetivo pelo status",
-      error: error.message,
-    });
-  }
-});
+router.get("/status/:status", ObjetivoController.getByStatus);
 
 /**
  * @swagger
@@ -80,42 +69,9 @@ router.get("/status/:status", async (req, res) => {
  *       404:
  *         description: Objetivo não encontrado
  */
-// router.get("/:id", (req, res) => {
-//     const index = getIndex(objetivos, req.params.id);
-//     if (!objetivos[index]) {
-//         return res.status(404).json({ message: "Objetivo não encontrado" });
-//     }
-//     res.status(200).json(objetivos[index]);
-// });
+router.get("/:id", ObjetivoController.getById);
 
-router.get("/:id", async (req, res) => {
-  try {
-    const objetivo = await Objetivo.findById(req.params.id);
-    if (!objetivo) return res.status(404).json({ message: "Objetivo não encontrado" });
-    res.status(200).json(objetivo);
-  } catch (error) {
-    res.status(500).json({ message: "Erro ao buscar objetivo", error });
-  }
-});
 
-/**
- * @swagger
- * /objetivos:
- *   post:
- *     summary: Cria um novo objetivo
- *     tags: [Objetivos]
- *     responses:
- *       201:
- *         description: Criou um novo objetivo
- */
-router.post("/", async (req, res) => {
-  try {
-    const novoObjetivo = await Objetivo.create(req.body);
-    res.status(201).json(novoObjetivo);
-  } catch (error) {
-    res.status(500).json({ message: "Erro ao criar objetivo", error });
-  }
-});
 
 /**
  * @swagger
@@ -146,16 +102,7 @@ router.post("/", async (req, res) => {
  *       404:
  *         description: Objetivo não encontrado
  */
-router.put("/:id", async (req, res) => {
-  try {
-    const objetivo = await Objetivo.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (!objetivo) return res.status(404).json({ message: "Objetivo não encontrado" });
-    res.status(200).json(objetivo);
-  } catch (error) {
-    res.status(500).json({ message: "Erro ao atualizar objetivo", error });
-  }
-
-});
+router.put("/:id", ObjetivoController.updateObjetivo);
 
 
 /**
@@ -177,15 +124,7 @@ router.put("/:id", async (req, res) => {
  *       404:
  *         description: Objetivo não encontrado
  */
-router.delete("/:id", async (req, res) => {
-  try {
-    const objetivo = await Objetivo.findByIdAndDelete(req.params.id);
-    if (!objetivo) return res.status(404).json({ message: "Objetivo não encontrado" });
-    res.status(200).json({ message: "Objetivo deletado com sucesso" });
-  } catch (error) {
-    res.status(500).json({ message: "Erro ao deletar objetivo", error });
-  }
-});
+router.delete("/:id", ObjetivoController.deleteObjetivo);
 
 
 export default router;
