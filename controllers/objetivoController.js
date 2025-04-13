@@ -1,4 +1,4 @@
-import Objetivo from "../models/Objetivo.js";
+const Objetivo = require("../models/Objetivo.models.js");
 
 class ObjetivoController {
 
@@ -72,4 +72,4 @@ class ObjetivoController {
 }
 
 
-export default ObjetivoController;
+module.exports = ObjetivoController;

@@ -1,4 +1,4 @@
-import Atividade from "../models/atividade.js";
+const Atividade = require("../models/Atividade.models.js");
 
 class AtividadeController {
     static async getAll(req, res) {
@@ -47,4 +47,4 @@ class AtividadeController {
     }
 }
 
-export default AtividadeController;
+module.exports = AtividadeController;

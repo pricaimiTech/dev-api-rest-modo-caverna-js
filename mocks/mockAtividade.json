@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "title": "atividade",
+        "name": "atividade",
         "descrição": "string",
         "icone": "string",
         "isConclued": false,
@@ -12,14 +12,14 @@
             "descricao_categoria": "string",
             "pilar": {
                 "id": 2,
-                "title": "obrigatorio",
+                "name": "obrigatorio",
                 "descricao_pilar": "string"
             }
         }
     },
     {
         "id": 2,
-        "title": "atividade",
+        "name": "atividade",
         "descrição": "string",
         "icone": "string",
         "isConclued": true,
@@ -30,14 +30,14 @@
             "descricao_categoria": "string",
             "pilar": {
                 "id": 2,
-                "title": "obrigatorio",
+                "name": "obrigatorio",
                 "descricao_pilar": "string"
             }
         }
     },
     {
         "id": 3,
-        "title": "atividade",
+        "name": "atividade",
         "descrição": "string",
         "icone": "string",
         "isConclued": false,
@@ -48,7 +48,7 @@
             "descricao_categoria": "string",
             "pilar": {
                 "id": 2,
-                "title": "obrigatorio",
+                "name": "obrigatorio",
                 "descricao_pilar": "string"
             }
         }

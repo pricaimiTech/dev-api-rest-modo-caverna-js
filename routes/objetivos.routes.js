@@ -1,5 +1,5 @@
-import express from "express";
-import ObjetivoController from "../../controllers/objetivoController.js";
+const express = require("express");
+const ObjetivoController = require("../controllers/objetivoController.js");
 const router = express.Router();
 
 /**
@@ -93,7 +93,7 @@ router.get("/:id", ObjetivoController.getById);
  *           schema:
  *             type: object
  *             properties:
- *               title:
+ *               name:
  *                 type: string
  *                 example: Aprender Node.js
  *     responses:
@@ -127,4 +127,4 @@ router.put("/:id", ObjetivoController.updateObjetivo);
 router.delete("/:id", ObjetivoController.deleteObjetivo);
 
 
-export default router;
+module.exports = router;

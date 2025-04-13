@@ -1,5 +1,5 @@
-import express from "express";
-import PilarController from "../../controllers/pilarController.js";
+const express = require("express");
+const PilarController = require("../controllers/pilarController.js");
 const router = express.Router();
 
 
@@ -58,4 +58,4 @@ router.get("/:id", PilarController.getById);
  */
 router.get("/objetivo/:nome", PilarController.getByObjetivo);
 
-export default router;
+module.exports = router;

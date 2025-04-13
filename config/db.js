@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
-import dotenv from 'dotenv';
+const dotenv = require('dotenv');
 dotenv.config({ path: './environment/dev.env' });
 
 
@@ -13,4 +13,4 @@ const connectToDatabase = async () => {
   }
 };
 
-export default connectToDatabase;
+module.exports = connectToDatabase;

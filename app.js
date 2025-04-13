@@ -1,10 +1,10 @@
-import express from "express";
-import connectDB from "./config/db.js"; // Ajuste o caminho conforme a estrutura do seu projeto
+const express = require("express");
+const connectDB = require("./config/db.js"); // Ajuste o caminho conforme a estrutura do seu projeto
 
-import objetivosRoutes from './src/routes/objetivos.routes.js';
-import pilaresRoutes from './src/routes/pilares.routes.js';
-import categoriasRoutes from './src/routes/categorias.routes.js';
-import atividadesRoutes from './src/routes/atividades.routes.js';
+const objetivosRoutes = require('./routes/objetivos.routes.js');
+const pilaresRoutes = require('./routes/pilares.routes.js');
+const categoriasRoutes = require('./routes/categorias.routes.js');
+const atividadesRoutes = require('./routes/atividades.routes.js');
 
 const app = express();
 app.use(express.json());
@@ -18,4 +18,4 @@ app.use('/categorias', categoriasRoutes);
 app.use('/atividades', atividadesRoutes);
 
 
-export default app;
+module.exports = app;

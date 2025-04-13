@@ -146,7 +146,7 @@ collection:
           text: |-
             {
             	"id": 4,
-            	"title": "deletar atividade",
+            	"name": "deletar atividade",
             	"descrição": "string",
             	"icone": "string",
             	"isConclued": true,
@@ -157,7 +157,7 @@ collection:
             		"descricao_categoria": "string",
             		"pilar": {
             			"id": 2,
-            			"title": "obrigatorio",
+            			"name": "obrigatorio",
             			"descricao_pilar": "string"
             		}
             	}
@@ -190,7 +190,7 @@ collection:
             {
             		"_id": "67f5c077c7f13407bcb064c6",
             		"id": 4,
-            		"title": "atividade nova criada diaria",
+            		"name": "atividade nova criada diaria",
             		"descrição": "string",
             		"icone": "string",
             		"isConclued": false,
@@ -201,7 +201,7 @@ collection:
             			"descricao_categoria": "string",
             			"pilar": {
             				"id": 2,
-            				"title": "obrigatorio",
+            				"name": "obrigatorio",
             				"descricao_pilar": "string"
             			}
             		},
@@ -325,12 +325,12 @@ collection:
           text: >-
             {
             	"id": 7,
-            	"title": "criando uma nova categoria",
+            	"name": "criando uma nova categoria",
             	"descrição": "string",
             	"icone": "",
             	"pilar": {
             		"id": 1,
-            		"title": "flexível",
+            		"name": "flexível",
             		"descrição": "string",
             		"icone": "string"
             	},
@@ -364,12 +364,12 @@ collection:
           text: >-
             	{
             		"id": 4,
-            		"title": "Categoira atualizada via banco de dados",
+            		"name": "Categoira atualizada via banco de dados",
             		"descrição": "string",
             		"icone": "string",
             		"pilar": {
             			"id": 1,
-            			"title": "flexivel",
+            			"name": "flexivel",
             			"descrição": "string",
             			"icone": "string"
             		},
@@ -514,7 +514,7 @@ collection:
           text: >-
             {
             	"id": 1,
-            	"title": "Criando o primeiro objetivo com a integração com banco de dados",
+            	"name": "Criando o primeiro objetivo com a integração com banco de dados",
             	"descrição": "",
             	"icone": "",
             	"andamento": "calculo com base atividades flexível em cima do prazo",
@@ -529,28 +529,28 @@ collection:
             	"pilares": [
             		{
             			"id": 1,
-            			"title": "flexivel",
+            			"name": "flexivel",
             			"categoria": []
             		},
             		{
             			"id": 2,
-            			"title": "obrigatório",
+            			"name": "obrigatório",
             			"categoria": [
             				{
             					"id": 1,
-            					"title": "exercicio",
+            					"name": "exercicio",
             					"pilar": "obrigatório",
             					"atividade": []
             				},
             				{
             					"id": 2,
-            					"title": "mente",
+            					"name": "mente",
             					"pilar": "obrigatório",
             					"atividade": []
             				},
             				{
             					"id": 3,
-            					"title": "intelecto",
+            					"name": "intelecto",
             					"pilar": "obrigatório",
             					"atividade": []
             				}
@@ -585,7 +585,7 @@ collection:
           text: >-
             {
             	"id": 1,
-            	"title": "Objetivo atualizado pela integração com banco de dados",
+            	"name": "Objetivo atualizado pela integração com banco de dados",
             	"descrição": "",
             	"icone": "",
             	"andamento": "calculo com base atividades flexível em cima do prazo",
@@ -600,28 +600,28 @@ collection:
             	"pilares": [
             		{
             			"id": 1,
-            			"title": "flexivel",
+            			"name": "flexivel",
             			"categoria": []
             		},
             		{
             			"id": 2,
-            			"title": "obrigatório",
+            			"name": "obrigatório",
             			"categoria": [
             				{
             					"id": 1,
-            					"title": "exercicio",
+            					"name": "exercicio",
             					"pilar": "obrigatório",
             					"atividade": []
             				},
             				{
             					"id": 2,
-            					"title": "mente",
+            					"name": "mente",
             					"pilar": "obrigatório",
             					"atividade": []
             				},
             				{
             					"id": 3,
-            					"title": "intelecto",
+            					"name": "intelecto",
             					"pilar": "obrigatório",
             					"atividade": []
             				}
@@ -747,13 +747,13 @@ collection:
           text: |-
             {
             	"id": 1,
-            	"title": "pilar criado via integração com banco",
+            	"name": "pilar criado via integração com banco",
             	"descrição": "",
             	"icone": "",
             	"categoria": [],
             	"objetivo": {
             		"id": 2,
-            		"title": "objetivo",
+            		"name": "objetivo",
             		"descricao": "string"
             	}
             }
@@ -783,7 +783,7 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"title": "pilar atualizado via integração com banco"
+            	"name": "pilar atualizado via integração com banco"
             }
         headers:
           - name: Content-Type

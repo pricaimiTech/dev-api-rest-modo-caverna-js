@@ -1,11 +1,11 @@
 // swagger.js
-import swaggerJSDoc from "swagger-jsdoc";
-import swaggerUi from "swagger-ui-express";
+const swaggerJSDoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
 
 const swaggerDefinition = {
   openapi: "3.0.0",
   info: {
-    title: "API Modo Caverna",
+    name: "API Modo Caverna",
     version: "1.0.0",
     description: "Documentação da API de gerenciamento de objetivos e atividades do projeto Modo Caverna",
   },
@@ -28,4 +28,4 @@ const setupSwaggerDocs = (app) => {
   app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 };
 
-export default setupSwaggerDocs;
+module.exports = setupSwaggerDocs;

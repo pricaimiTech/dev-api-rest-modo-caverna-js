@@ -1,12 +1,12 @@
 [
     {
         "id": 1,
-        "title": "exercicio",
+        "name": "exercicio",
         "descrição": "string",
         "icone": "",
         "pilar": {
             "id": 2,
-            "title": "obrigatório",
+            "name": "obrigatório",
             "descrição": "string",
             "icone": "string"
         },
@@ -15,13 +15,13 @@
     },
     {
         "id": 2,
-        "title": "mente",
+        "name": "mente",
         "descrição": "string",
         "icone": "string",
         "pilar":
             {
                 "id": 2,
-                "title": "obrigatório",
+                "name": "obrigatório",
                 "descrição": "string",
                 "icone": "string"
             }
@@ -31,13 +31,13 @@
     },
     {
         "id": 3,
-        "title": "intelecto",
+        "name": "intelecto",
         "descrição": "string",
         "icone": "string",
         "pilar":
             {
                 "id": 2,
-                "title": "obrigatório",
+                "name": "obrigatório",
                 "descrição": "string",
                 "icone": "string"
             }
@@ -47,13 +47,13 @@
     },
     {
         "id": 4,
-        "title": "flexivel",
+        "name": "flexivel",
         "descrição": "string",
         "icone": "string",
         "pilar": 
             {
                 "id": 1,
-                "title": "flexivel",
+                "name": "flexivel",
                 "descrição": "string",
                 "icone": "string"
             }
@@ -63,13 +63,13 @@
     },
     {
         "id": 5,
-        "title": "flexivel",
+        "name": "flexivel",
         "descrição": "string",
         "icone": "string",
         "pilar": 
             {
                 "id": 1,
-                "title": "flexivel",
+                "name": "flexivel",
                 "descrição": "string",
                 "icone": "string"
             }
@@ -79,13 +79,13 @@
     },
     {
         "id": 6,
-        "title": "flexivel",
+        "name": "flexivel",
         "descrição": "string",
         "icone": "string",
         "pilar":
             {
                 "id": 1,
-                "title": "flexivel",
+                "name": "flexivel",
                 "descrição": "string",
                 "icone": "string"
             }
