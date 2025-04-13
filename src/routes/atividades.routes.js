@@ -30,26 +30,6 @@ router.post("/", AtividadeController.createAtividade);
 
 /**
  * @swagger
- * /atividades/diarias:
- *   get:
- *     summary: Lista atividades diárias, filtrando por concluídas ou não
- *     tags: [Atividades]
- *     parameters:
- *       - in: query
- *         name: concluidas
- *         required: false
- *         schema:
- *           type: string
- *           enum: [true, false]
- *         description: Filtrar por atividades concluídas ou não
- *     responses:
- *       200:
- *         description: Lista de tarefas diárias
- */
-router.get("/diarias", AtividadeController.getDiarias);
-
-/**
- * @swagger
  * /atividades/{id}:
  *   get:
  *     summary: Retorna uma atividade específica
@@ -120,5 +100,6 @@ router.put("/:id", AtividadeController.updateAtividade);
  *         description: Atividade não encontrado
  */
 router.delete("/:id", AtividadeController.deleteAtividade);
+
 
 export default router;

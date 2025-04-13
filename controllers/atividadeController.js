@@ -17,28 +17,7 @@ class AtividadeController {
             res.status(500).json({ message: "Erro ao criar nova atividade", error });
         }
     }
-    static async getDiarias(req, res) {
-        try {
-            const { concluidas } = req.query;
-
-            // Cria o filtro base: atividades diárias
-            const filtro = { isDiaria: true };
-
-            // Aplica filtro adicional se o parâmetro 'concluidas' for passado
-            if (concluidas === "true") {
-                filtro.isConclued = true;
-            } else if (concluidas === "false") {
-                filtro.isConclued = false;
-            }
-
-            // Busca no banco usando o filtro
-            const tarefasDiarias = await Atividade.find(filtro);
-            res.status(200).json(tarefasDiarias);
-
-        } catch (error) {
-            res.status(500).json({ message: "Erro ao buscar atividades diárias", error: error.message });
-        }
-    }
+    
     static async getById(req, res) {
         try {
             const atividade = await Atividade.findById(req.params.id);
