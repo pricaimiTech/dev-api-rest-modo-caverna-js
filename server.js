@@ -1,6 +1,6 @@
 // import http from "http";
-import app from "./app.js";
-import setupSwaggerDocs from "./config/swagger.js";
+const app = require("./app.js");
+const setupSwaggerDocs = require("./config/swagger.js");
 
 const PORT = 3000;
 setupSwaggerDocs(app);

@@ -1,60 +1,58 @@
-import express from "express";
-import AtividadeController from "../../controllers/atividadeController.js";
-
+const express = require("express");
+const CategoriaController = require("../controllers/categoriaController.js");
 const router = express.Router();
 
-
 /**
  * @swagger
- * /atividades:
+ * /categorias:
  *   get:
- *     summary: Lista todas as atividades
- *     tags: [Atividades]
+ *     summary: Lista todas as categorias
+ *     tags: [Categorias]
  *     responses:
  *       200:
- *         description: Lista de atividades
+ *         description: Lista de categorias
  */
-router.get("/", AtividadeController.getAll);
+router.get("/", CategoriaController.getAll);
 
 /**
  * @swagger
- * /atividades:
+ * /categorias:
  *   post:
- *     summary: Cria uma nova atividade
- *     tags: [Atividades]
+ *     summary: Cria uma nova categoria
+ *     tags: [Categorias]
  *     responses:
  *       201:
- *         description: Criou uma nova atividade
+ *         description: Criou uma nova categoria
  */
-router.post("/", AtividadeController.createAtividade);
+router.post("/", CategoriaController.createCategoria);
 
 /**
  * @swagger
- * /atividades/{id}:
+ * /categorias/{id}:
  *   get:
- *     summary: Retorna uma atividade específica
- *     tags: [Atividades]
+ *     summary: Retorna uma categoria específica
+ *     tags: [Categorias]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID da atividade
+ *         description: ID da categoria
  *     responses:
  *       200:
- *         description: Atividade encontrada
+ *         description: Categoria encontrada
  *       404:
- *         description: Atividade não encontrada
+ *         description: Categoria não encontrada
  */
-router.get("/:id", AtividadeController.getById);
+router.get("/:id", CategoriaController.getById);
 
 /**
  * @swagger
- * /atividades/{id}:
+ * /categorias/{id}:
  *   put:
- *     summary: Atualiza o titulo de uma atividade
- *     tags: [Atividades]
+ *     summary: Atualiza o titulo de uma categoria
+ *     tags: [Categorias]
  *     parameters:
  *       - in: path
  *         name: id
@@ -69,23 +67,24 @@ router.get("/:id", AtividadeController.getById);
  *           schema:
  *             type: object
  *             properties:
- *               title:
+ *               name:
  *                 type: string
  *                 example: Aprender Node.js
  *     responses:
  *       200:
- *         description: Atividade encontrado
+ *         description: Objetivo encontrado
  *       404:
- *         description: Atividade não encontrado
+ *         description: Objetivo não encontrado
  */
-router.put("/:id", AtividadeController.updateAtividade);
+router.put("/:id", CategoriaController.updateCategoria);
+
 
 /**
  * @swagger
- * /atividades/{id}:
+ * /categorias/{id}:
  *   delete:
- *     summary: Deleta uma atividade
- *     tags: [Atividades]
+ *     summary: Deleta uma categoria
+ *     tags: [Categorias]
  *     parameters:
  *       - in: path
  *         name: id
@@ -99,7 +98,8 @@ router.put("/:id", AtividadeController.updateAtividade);
  *       404:
  *         description: Atividade não encontrado
  */
-router.delete("/:id", AtividadeController.deleteAtividade);
+router.delete("/:id", CategoriaController.deleteCategoria);
 
 
-export default router;
+
+module.exports = router;

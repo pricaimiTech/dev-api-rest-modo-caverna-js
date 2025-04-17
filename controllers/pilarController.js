@@ -1,4 +1,4 @@
-import Pilar from "../models/pilar.js";
+const Pilar = require("../models/Pilar.models.js");
 
 class PilarController {
     static async getAll(req, res) {
@@ -19,16 +19,6 @@ class PilarController {
             res.status(500).json({ message: "Erro ao buscar pilar", error });
         }
     }
-
-    static async getByObjetivo(req, res) {
-        try {
-            const pilar = await Pilar.findOne({ 'objetivo.title': req.params.nome });
-            if (!pilar) return res.status(404).json({ message: "Pilar não encontrado" });
-            res.status(200).json(pilar);
-        } catch (error) {
-            res.status(500).json({ message: "Erro ao buscar pilar", error });
-        }
-    }
 }
 
-export default PilarController;
+module.exports = PilarController;

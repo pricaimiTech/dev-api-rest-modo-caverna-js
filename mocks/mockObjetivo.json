@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "title": "Objetivo SMART",
+        "name": "Objetivo SMART",
         "descrição": "",
         "icone": "",
         "andamento": "calculo com base atividades flexível em cima do prazo",
@@ -16,28 +16,28 @@
         "pilares": [
             {
                 "id": 1,
-                "title": "flexivel",
+                "name": "flexivel",
                 "categoria": []
             },
             {
                 "id": 2,
-                "title": "obrigatório",
+                "name": "obrigatório",
                 "categoria": [
                     {
                         "id": 1,
-                        "title": "exercicio",
+                        "name": "exercicio",
                         "pilar": "obrigatório",
                         "atividade": []
                     },
                     {
                         "id": 2,
-                        "title": "mente",
+                        "name": "mente",
                         "pilar": "obrigatório",
                         "atividade": []
                     },
                     {
                         "id": 3,
-                        "title": "intelecto",
+                        "name": "intelecto",
                         "pilar": "obrigatório",
                         "atividade": []
                     }
@@ -47,7 +47,7 @@
     },
     {
         "id": 2,
-        "title": "Objetivo",
+        "name": "Objetivo",
         "descrição": "",
         "icone": "",
         "andamento": "calculo com base atividades flexível em cima do prazo",
@@ -62,28 +62,28 @@
         "pilares": [
             {
                 "id": 1,
-                "title": "flexivel",
+                "name": "flexivel",
                 "categoria": []
             },
             {
                 "id": 2,
-                "title": "obrigatório",
+                "name": "obrigatório",
                 "categoria": [
                     {
                         "id": 1,
-                        "title": "exercicio",
+                        "name": "exercicio",
                         "pilar": "obrigatório",
                         "atividade": []
                     },
                     {
                         "id": 2,
-                        "title": "mente",
+                        "name": "mente",
                         "pilar": "obrigatório",
                         "atividade": []
                     },
                     {
                         "id": 3,
-                        "title": "intelecto",
+                        "name": "intelecto",
                         "pilar": "obrigatório",
                         "atividade": []
                     }
