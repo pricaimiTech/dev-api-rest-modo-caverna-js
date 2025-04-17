@@ -46,7 +46,8 @@ const objetivoSchema = new mongoose.Schema({
     ref: 'Categoria'
   }]
 }, {
-  timestamps: true
+  timestamps: true,
+  collection: 'objetivos',
 });
 
 

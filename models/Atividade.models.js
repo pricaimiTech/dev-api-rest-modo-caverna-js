@@ -46,21 +46,22 @@ const atividadeSchema = new mongoose.Schema({
     required: true
   }
 }, {
-  timestamps: true
+  timestamps: true,
+  collection: 'atividades',
 });
 
 // Logica para criar atividades diárias no Pilar Obrigatório
-atividadeSchema.pre('save', async function(next) {
-  const categoria = await this.populate('categoriaId').execPopulate();
-  const pilar = categoria.pilarId;
+// atividadeSchema.pre('save', async function(next) {
+//   const categoria = await this.populate('categoriaId').execPopulate();
+//   const pilar = categoria.pilarId;
 
-  if (pilar.title === 'obrigatório') {
-    // Criar atividade para cada dia
-    this.dataExecucao = new Date();  // Data do dia atual
-  }
+//   if (pilar.title === 'obrigatório') {
+//     // Criar atividade para cada dia
+//     this.dataExecucao = new Date();  // Data do dia atual
+//   }
 
-  next();
-});
+//   next();
+// });
 
 // Função para verificar se a atividade está concluída
 atividadeSchema.methods.marcarComoConcluida = function() {

@@ -19,16 +19,6 @@ class PilarController {
             res.status(500).json({ message: "Erro ao buscar pilar", error });
         }
     }
-
-    static async getByObjetivo(req, res) {
-        try {
-            const pilar = await Pilar.findOne({ 'objetivo.name': req.params.nome });
-            if (!pilar) return res.status(404).json({ message: "Pilar não encontrado" });
-            res.status(200).json(pilar);
-        } catch (error) {
-            res.status(500).json({ message: "Erro ao buscar pilar", error });
-        }
-    }
 }
 
 module.exports = PilarController;

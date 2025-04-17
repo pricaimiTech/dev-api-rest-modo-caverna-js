@@ -24,7 +24,8 @@ const pilarSchema = new mongoose.Schema({
     ref: 'Categoria'
   }]
 }, {
-  timestamps: true
+  timestamps: true,
+  collection: 'pilares',
 });
 
 const Pilar = mongoose.model("Pilar", pilarSchema);

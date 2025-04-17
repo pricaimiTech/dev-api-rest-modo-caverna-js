@@ -26,7 +26,8 @@ const categoriaSchema = new mongoose.Schema({
     ref: 'Atividade'
   }]
 }, {
-  timestamps: true
+  timestamps: true,
+  collection: 'categorias',
 });
 
 const Categoria = mongoose.model("Categoria", categoriaSchema);
