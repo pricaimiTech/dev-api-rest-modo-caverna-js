@@ -6,7 +6,7 @@ const atividadeSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    required: false
   },
   name: {
     type: String,
@@ -48,6 +48,7 @@ const atividadeSchema = new mongoose.Schema({
 }, {
   timestamps: true,
   collection: 'atividades',
+  versionKey: false // Adicionado para remover o __v
 });
 
 // Logica para criar atividades diárias no Pilar Obrigatório

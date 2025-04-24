@@ -4,7 +4,7 @@ const categoriaSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    required: false
   },
   name: {
     type: String,
@@ -28,6 +28,7 @@ const categoriaSchema = new mongoose.Schema({
 }, {
   timestamps: true,
   collection: 'categorias',
+  versionKey: false // Adicionado para remover o __v
 });
 
 const Categoria = mongoose.model("Categoria", categoriaSchema);

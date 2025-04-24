@@ -1,4 +1,5 @@
 const Objetivo = require("../models/Objetivo.models.js");
+const ObjetivoService = require("../services/ObjetivoService.js")
 
 class ObjetivoController {
 
@@ -14,9 +15,8 @@ class ObjetivoController {
   static async createObjetivo(req, res) {
     try {
       const requestBody = req.body;
-      const novoObjetivo = new Objetivo(requestBody);
-      await novoObjetivo.save();
-      res.status(201).json(novoObjetivo);
+      const objetivoSalvo = await ObjetivoService.criarObjetivo(requestBody)
+      res.status(201).json(objetivoSalvo);
     } catch (error) {
       res.status(500).json({ message: "Erro ao criar objetivo", error });
     }

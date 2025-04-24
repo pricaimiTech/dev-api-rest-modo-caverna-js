@@ -29,6 +29,7 @@ const userSchema = new mongoose.Schema({
 }, {
   timestamps: true,
   collection: 'users',
+  versionKey: false // Adicionado para remover o __v
 });
 
 const User = mongoose.model("User", userSchema);
