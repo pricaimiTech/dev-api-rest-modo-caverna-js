@@ -6,7 +6,7 @@ const pilarSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    required: false
   },
   name: {
     type: String,
@@ -19,13 +19,14 @@ const pilarSchema = new mongoose.Schema({
     default: '',
     required: true
   },
-  categoria: [{
+  categorias: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Categoria'
   }]
 }, {
   timestamps: true,
   collection: 'pilares',
+  versionKey: false // Adicionado para remover o __v
 });
 
 const Pilar = mongoose.model("Pilar", pilarSchema);

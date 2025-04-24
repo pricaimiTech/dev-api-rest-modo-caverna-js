@@ -19,7 +19,7 @@ const swaggerDefinition = {
 
 const options = {
   swaggerDefinition,
-  apis: ["./src/routes/*.js"], // 🔥 IMPORTANTE: caminho dos arquivos com as anotações Swagger
+  apis: ["./routes/*.js"], // 🔥 IMPORTANTE: caminho dos arquivos com as anotações Swagger
 };
 
 const swaggerSpec = swaggerJSDoc(options);

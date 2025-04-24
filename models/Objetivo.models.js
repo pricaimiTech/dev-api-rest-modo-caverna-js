@@ -37,17 +37,14 @@ const objetivoSchema = new mongoose.Schema({
     default: 'TO_DO'
   },
   pilares: [{
-    type: String,
-    enum: PilaresEnum,
+    type: mongoose.Schema.Types.ObjectId, // Alterado para ObjectId
+    ref: 'Pilar', // Referência ao modelo Pilar
     required: true
   }],
-  categorias: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Categoria'
-  }]
 }, {
   timestamps: true,
   collection: 'objetivos',
+  versionKey: false // Adicionado para remover o __v
 });
 
 
