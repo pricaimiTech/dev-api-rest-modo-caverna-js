@@ -3,7 +3,7 @@ const Categoria = require('../models/Categoria.models.js');
 
 const PilarService = {
 
-    atualizarPilar: async (id, data) => {
+    atualizarCategorias: async (id, data) => {
         try {
             const pilar = await Pilar.findById(id);
 
@@ -17,14 +17,20 @@ const PilarService = {
             }
 
             // Se o pilar for flexível, validar o número de categorias
-            if (pilar.name === 'flexivel' && data.categorias && data.categorias.length > 3) {
+            if (!Array.isArray(data) || data.length > 3) {
                 throw new Error('Pilares flexíveis podem ter no máximo 3 categorias.');
             }
 
-            pilar.name = data.name || pilar.name;
-            pilar.descricao = data.descricao || pilar.descricao;
-            pilar.tipo = data.tipo || pilar.tipo;
-            pilar.categorias = data.categorias || pilar.categorias;
+            // Validação: se veio categorias, verifique se todas existem
+            const categoriasExistentes = await Categoria.find({
+                _id: { $in: data }
+            });
+            if (categoriasExistentes.length !== data.length) {
+                throw new Error('Uma ou mais categorias informadas não existem.');
+            }
+
+            // Atualiza apenas o campo de categorias se o pilar for flexível
+            pilar.categorias = data;
 
             return await pilar.save();
         } catch (error) {

@@ -37,4 +37,33 @@ router.get("/", PilarController.getAll);
  */
 router.get("/:id", PilarController.getById);
 
+
+/**
+ * @swagger
+ * /pilares/{id}:
+ *   patch:
+ *     summary: Atualiza um pilar específico
+ *     tags: [Pilares]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID do pilar
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               categorias:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ */
+router.patch("/:id/categorias", PilarController.patchCategorias);
+
+
 module.exports = router;
