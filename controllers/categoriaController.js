@@ -1,4 +1,5 @@
 const Categoria = require("../models/Categoria.models.js");
+const CategoriaService = require("../services/CategoriaService.js");
 
 class CategoriaController {
 
@@ -12,10 +13,14 @@ class CategoriaController {
     }
     static async createCategoria(req, res) {
         try {
-            const novaCategoria = await Categoria.create(req.body);
+            const novaCategoria = await CategoriaService.createCategoria(req.body);
             res.status(201).json(novaCategoria);
         } catch (error) {
-            res.status(500).json({ message: "Erro ao criar categoria", error });
+            res.status(500).json({
+                message: error.message || "Erro ao criar categoria",
+                error: error.stack
+            }
+            );
         }
     }
     static async getById(req, res) {
