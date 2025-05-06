@@ -56,6 +56,32 @@ const CategoriaService = {
             console.error(error);
             throw error;
         }
+    },
+
+    createCategoria: async (data) => {
+        try {
+            const pilar = await Pilar.findById(data.pilarId);
+
+            if (!pilar) {
+                throw new Error('Pilar não encontrado.');
+            }
+            // Verificar se o pilar é obrigatório
+            if (pilar.name === 'obrigatório') {
+                throw new Error('Não é possível criar categorias para pilares obrigatórios.');
+            }
+
+            // constroi o objeto novaCategoria para enviar ao banco de dados
+            const novaCategoria = {
+                name: data.name,
+                descricao: data.descricao,
+                pilarId: data.pilarId,
+            };
+
+            return await Categoria.create(novaCategoria);
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
     }
 };
 
