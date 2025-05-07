@@ -11,20 +11,19 @@ const CategoriaService = {
             }
 
             // Verificar se a categoria é fixa de um pilar obrigatório
-            const pilar = await Pilar.findOne({
+            const pilarObrigatorio = await Pilar.findOne({
                 name: 'obrigatório',
                 categorias: id
             });
 
-            if (pilar) {
-                throw new Error('Categorias fixas de pilares obrigatórios não podem ser editadas.');
+            if (pilarObrigatorio) {
+                categoria.atividades = data.atividades || categoria.atividades
+            }else {
+                // Se não for do tipo pilar obrigatório, pode alterar o nome e a descrição
+                categoria.name = data.name || categoria.name;
+                categoria.descricao = data.descricao || categoria.descricao;
+                categoria.atividades = data.atividades || categoria.atividades
             }
-
-            categoria.name = data.name || categoria.name;
-            categoria.descricao = data.descricao || categoria.descricao;
-            categoria.pilarId = data.pilarId || categoria.pilarId;
-            categoria.userId = data.userId || categoria.userId;
-            categoria.atividades = data.atividades || categoria.atividades
 
             return await categoria.save();
         } catch (error) {
@@ -48,10 +47,10 @@ const CategoriaService = {
             });
 
             if (pilar) {
-                throw new Error('Categorias fixas de pilares obrigatórios não podem ser deletadas.');
+                throw new Error('Categoria de pilares obrigatórios não podem ser deletadas.');
             }
 
-            await categoria.remove();
+            return await categoria.remove();
         } catch (error) {
             console.error(error);
             throw error;

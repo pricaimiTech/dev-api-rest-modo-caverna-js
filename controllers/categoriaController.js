@@ -34,22 +34,32 @@ class CategoriaController {
             res.status(500).json({ message: "Erro ao buscar categoria", error });
         }
     }
-    static async updateCategoria(req, res) {
+    static async patchCategoria(req, res) {
         try {
-            const categoria = await Categoria.findByIdAndUpdate(req.params.id, req.body, { new: true });
+            const categoria = await CategoriaService.atualizarCategoria(req.params.id, req.body, { new: true });
             if (!categoria) return res.status(404).json({ message: "Categoria não encontrado" });
             res.status(200).json(categoria);
         } catch (error) {
-            res.status(500).json({ message: "Erro ao atualizar categoria", error });
+            res.status(500).json({
+                message: error.message || "Erro ao atualizar uma categoria",
+                error: error.stack
+            }
+            )
         }
     }
     static async deleteCategoria(req, res) {
         try {
-            const categoria = await Categoria.findByIdAndDelete(req.params.id);
-            if (!categoria) return res.status(404).json({ message: "Categoria não encontrada" });
-            res.status(200).json({ message: "Categoria deletada com sucesso" });
+            const categoria = await CategoriaService.deletarCategoria(req.params.id);
+            res.status(200).json({
+                message: "Categoria deletada com sucesso",
+                data: categoria
+            });
         } catch (error) {
-            res.status(500).json({ message: "Erro ao deletar categoria", error });
+            res.status(500).json({
+                message: error.message || "Erro ao deletar uma categoria",
+                error: error.stack
+            }
+            )
         }
     }
 

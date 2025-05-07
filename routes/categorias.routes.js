@@ -77,7 +77,7 @@ router.get("/:id", CategoriaController.getById);
  *       404:
  *         description: Objetivo não encontrado
  */
-router.put("/:id", CategoriaController.updateCategoria);
+router.patch("/:id", CategoriaController.patchCategoria);
 
 
 /**
