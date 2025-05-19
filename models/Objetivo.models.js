@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 const StatusEnum = ['TO_DO', 'IN_PROGRESS', 'CONCLUED', 'ARCHIEVE'];
-const PilaresEnum = ['obrigatório', 'flexível'];
 const PrazosEnum = [30, 60, 90, 120, 150];
 
 const objetivoSchema = new mongoose.Schema({

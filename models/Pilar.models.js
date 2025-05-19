@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const TipoPilarEnum = ['obrigatório', 'flexível'];
+const PilaresEnum = ['obrigatório', 'flexível'];
 
 const pilarSchema = new mongoose.Schema({
   userId: {
@@ -10,7 +10,7 @@ const pilarSchema = new mongoose.Schema({
   },
   name: {
     type: String,
-    enum: TipoPilarEnum,
+    enum: PilaresEnum,
     required: true
   },
   descricao: {
@@ -29,5 +29,5 @@ const pilarSchema = new mongoose.Schema({
   versionKey: false // Adicionado para remover o __v
 });
 
-const Pilar = mongoose.model("Pilar", pilarSchema);
+const Pilar = mongoose.model('Pilar', pilarSchema);
 module.exports = Pilar;

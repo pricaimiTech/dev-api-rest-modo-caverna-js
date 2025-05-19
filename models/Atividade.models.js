@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const StatusAtividadeEnum = ['pendente', 'em andamento', 'concluída'];
+const StatusAtividadeEnum = ['TO_DO', 'IN_PROGRESS', 'concluída'];
 
 const atividadeSchema = new mongoose.Schema({
   userId: {
@@ -26,7 +26,7 @@ const atividadeSchema = new mongoose.Schema({
   status: {
     type: String,
     enum: StatusAtividadeEnum,
-    default: 'pendente',
+    default: 'TO_DO',
     required: true
   },
   dataExecucao: {
@@ -51,27 +51,6 @@ const atividadeSchema = new mongoose.Schema({
   versionKey: false // Adicionado para remover o __v
 });
 
-// Logica para criar atividades diárias no Pilar Obrigatório
-// atividadeSchema.pre('save', async function(next) {
-//   const categoria = await this.populate('categoriaId').execPopulate();
-//   const pilar = categoria.pilarId;
-
-//   if (pilar.title === 'obrigatório') {
-//     // Criar atividade para cada dia
-//     this.dataExecucao = new Date();  // Data do dia atual
-//   }
-
-//   next();
-// });
-
-// Função para verificar se a atividade está concluída
-atividadeSchema.methods.marcarComoConcluida = function() {
-  this.status = 'concluída';
-  this.isConcluida = true;
-  this.dataConclusao = new Date();
-  return this.save();
-};
-
-const Atividade = mongoose.model("Atividade", atividadeSchema);
+const Atividade =  mongoose.model('Atividade', atividadeSchema);
 
 module.exports = Atividade;

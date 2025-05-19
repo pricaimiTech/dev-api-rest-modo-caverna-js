@@ -16,10 +16,10 @@ const categoriaSchema = new mongoose.Schema({
     required: true, // Tornando a descrição obrigatória
     trim: true
   },
-  pilarId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Pilar',
-    required: true
+  pilares: {
+    type: mongoose.Schema.Types.ObjectId, // Alterado para ObjectId
+    ref: 'Pilar', // Referência ao modelo Pilar
+    required: false
   },
   atividades: [{
     type: mongoose.Schema.Types.ObjectId,
@@ -31,6 +31,6 @@ const categoriaSchema = new mongoose.Schema({
   versionKey: false // Adicionado para remover o __v
 });
 
-const Categoria = mongoose.model("Categoria", categoriaSchema);
+const Categoria = mongoose.model('Categoria', categoriaSchema);
 
 module.exports = Categoria;
